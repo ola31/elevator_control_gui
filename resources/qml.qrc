@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/ola.qml</file>
+        <file>qml/Ola_dial.qml</file>
+        <file>qml/Ev_status_box.qml</file>
+        <file>qml/Robot_service_box.qml</file>
+        <file>qml/Round_squere_button.qml</file>
+        <file>qml/Set_robot_service_box.qml</file>
+        <file>qml/Sequence_viewer.qml</file>
+    </qresource>
+</RCC>
