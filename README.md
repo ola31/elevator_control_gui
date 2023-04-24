@@ -1,3 +1,3 @@
-# kubot gui
+# elevator control gui
 
-Kubot Gui package
+Elevator Control Gui package

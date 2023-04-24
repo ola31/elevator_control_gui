@@ -103,6 +103,13 @@ Window {
                             top:parent.top
                             topMargin: parent.height*0.2
                         }
+                        text: ola_view_model.sequence
+
+                        Connections{
+                            target: ola_view_model
+                            onSequenceChanged: sequence_viewer.blink();
+                        }
+
 
                     }
 
@@ -117,7 +124,8 @@ Window {
                         background_color: parent.color
                         color_off: 'black'
                         color_on: 'limegreen'
-                        onTaking_on_clicked: sequence_viewer.blink()
+                        //onTaking_on_clicked: //sequence_viewer.blink()
+
 
                     }
                 }

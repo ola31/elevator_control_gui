@@ -3,7 +3,7 @@
 OlaModel::OlaModel()
 : QObject(), Node("ola_model_node")                 //, count_(0)
 {
-  auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(20)).reliable().transient_local();
+  auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(20)).best_effort().durability_volatile();
   using namespace std::placeholders;
 //  pub_ = this->create_publisher<std_msgs::msg::Bool>("ola_topic", qos_profile);
 
@@ -29,6 +29,18 @@ OlaModel::OlaModel()
   set_robot_status_client = this->create_client<elevator_interfaces::srv::SetRobotService>(
     "set_robot_service");
 
+//  auto ros_spin = [this]() {
+//      rclcpp::executors::SingleThreadedExecutor exec;
+//      rclcpp::WallRate loop_rate(100);
+
+//      while (rclcpp::ok()) {
+//        exec.spin_node_some(shared_from_this());
+//        loop_rate.sleep();
+//      }
+//      return;
+//    };
+//  spin_thread = std::thread(ros_spin);
+
 
 }
 
@@ -53,6 +65,9 @@ void OlaModel::is_stop_pub(bool is_stop_)
 void OlaModel::robot_service_seqeunce_callback(
   const elevator_interfaces::msg::RobotServiceSequence::SharedPtr msg)
 {
+  //RCLCPP_INFO(this->get_logger(), "sequence : %s", msg->sequence.c_str());
+  this->sequence = msg->sequence;
+  emit sequence_topic_signal();
 
 }
 
@@ -228,4 +243,12 @@ void OlaModel::update_rl_turn(double rl_turn_degree)
 bool OlaModel::get_is_stop()
 {
   return is_stop;
+}
+
+
+//
+
+std::string OlaModel::get_sequence()
+{
+  return sequence;
 }

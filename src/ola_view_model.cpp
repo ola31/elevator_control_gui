@@ -25,12 +25,25 @@ OlaViewModel::OlaViewModel(int argc, char ** argv, QObject * parent)
     ola_model_.get(), SIGNAL(image_callback_signal()), this,
     SLOT(updateMainImage()));
 
+  connect(
+    ola_model_.get(), SIGNAL(sequence_topic_signal()), this,
+    SIGNAL(sequence_recieve_notify()));
+
+  //sequence_topic_signal
+
 }
 
 OlaViewModel::~OlaViewModel()
 {
   spin_thread.join();
 }
+
+
+QString OlaViewModel::get_sequence_topic() //new
+{
+  return QString::fromStdString(ola_model_->get_sequence());
+}
+
 
 void OlaViewModel::ola_function(int ola_value)
 {

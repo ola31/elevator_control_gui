@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <stdint.h>
+#include <thread>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/bool.hpp"
@@ -93,7 +94,15 @@ public:
   void get_ev_status(int ev_num);
   void set_robot_service(std::string robot_status);
 
+  //
+  std::string get_sequence();
+
 private:
+  std::thread spin_thread;
+
+  std::string sequence;
+
+
   bool is_stop = true;
   double fb_step = 0.0;
   double rl_step = 0.0;
@@ -109,6 +118,7 @@ private:
 
 signals:
   void image_callback_signal();
+  void sequence_topic_signal();
 };
 
 

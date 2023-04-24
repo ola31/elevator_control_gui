@@ -13,6 +13,8 @@ class OlaViewModel : public QObject
   Q_PROPERTY(bool is_stop_state READ getIsStopState /*WRITE setName*/ NOTIFY isStopStateChanged)
   Q_PROPERTY(QImage main_image READ getMainImage /*WRITE setName*/ NOTIFY mainImageUpdated)
 
+  Q_PROPERTY(QString sequence READ get_sequence_topic NOTIFY sequence_recieve_notify)
+
 public:
   explicit OlaViewModel(int argc, char ** argv, QObject * parent = nullptr);
   virtual ~OlaViewModel();
@@ -29,12 +31,15 @@ public:
   QImage getMainImage(void);
   QString getDisplayMsg(void);
 
+  QString get_sequence_topic();
+
 private slots:
   void updateMainImage();
 
 signals:
   bool isStopStateChanged(void);
   bool mainImageUpdated(void);
+  void sequence_recieve_notify(void);
 
 protected:
   int m_olaValue = -1;
