@@ -64,7 +64,7 @@ void OlaModel::robot_service_call(int ev_num, std::string call_floor, std::strin
         result_qstr = QString("False");
       }
 
-      emit robot_service_result_signal(result_qstr); //signal
+      emit resultCallRobotService(result_qstr); //signal
       return;
     };
 
@@ -163,7 +163,7 @@ void OlaModel::get_ev_status(int ev_num)
       ev_status_map["error_code"] = error_code_s;
       ev_status_map["group"] = group_s;
 
-      emit ev_status_result_signal(get_ev_status_qstr());
+      emit resultGetEvStatus(get_ev_status_qstr());
       return;
     };
 

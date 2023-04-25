@@ -25,9 +25,9 @@ public:
 
   //Q PROPERTY Setter, Getter
 
-  QString sequence();
-  QString robotServiceResult();
-  QString evStatus();
+  QString sequence() const;
+  QString robotServiceResult() const;
+  QString evStatus() const;
 
   Q_INVOKABLE void bttnCallRobotServiceClicked(
     int ev_num, QString call_floor,

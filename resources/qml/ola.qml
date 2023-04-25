@@ -13,7 +13,7 @@ Window {
     property int h_: 1080
     width: w_
     height: h_
-    title: "EV TEST GUI"//"ola_window"
+    title: "EV TEST GUI"
     visible: true
     color : "#334457"//"black"
     Rectangle {
@@ -90,9 +90,7 @@ Window {
                         }
                         service_result : ola_view_model.robotServiceResult
                     }
-
                 }
-
             }
             SplitView{
                 id: splitView_right
@@ -133,8 +131,6 @@ Window {
                             target: ola_view_model
                             onSequenceChanged: sequence_viewer.blink();
                         }
-
-
                     }
 
                     Set_robot_service_box{
@@ -152,10 +148,8 @@ Window {
                         onGetting_off_clicked: ola_view_model.bttnSetStatusClicked("Getting Off")
                     }
                 }
-
             }
         }
-
     }
 }
 //

@@ -29,11 +29,11 @@ OlaViewModel::OlaViewModel(int argc, char ** argv, QObject * parent)
     SLOT(setSequence(QString)));
 
   connect(
-    ola_model_.get(), SIGNAL(robot_service_result_signal(QString)), this,
+    ola_model_.get(), SIGNAL(resultCallRobotService(QString)), this,
     SLOT(setRobotServiceResult(QString)));
 
   connect(
-    ola_model_.get(), SIGNAL(ev_status_result_signal(QString)), this,
+    ola_model_.get(), SIGNAL(resultGetEvStatus(QString)), this,
     SIGNAL(setRobotServiceResult(QString)));
 
 }
@@ -44,7 +44,7 @@ OlaViewModel::~OlaViewModel()
 }
 
 
-QString OlaViewModel::sequence()
+QString OlaViewModel::sequence() const
 {
   return m_sequence;
 }
@@ -54,7 +54,7 @@ void OlaViewModel::setSequence(QString value)
   emit sequenceChanged();
 }
 
-QString OlaViewModel::robotServiceResult()
+QString OlaViewModel::robotServiceResult() const
 {
   return m_robotServiceResult;
 }
@@ -64,7 +64,7 @@ void OlaViewModel::setRobotServiceResult(QString value)
   emit robotServiceResultChanged();
 }
 
-QString OlaViewModel::evStatus()
+QString OlaViewModel::evStatus() const
 {
   return m_evStatus;
 }

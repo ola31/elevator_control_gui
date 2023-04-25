@@ -106,8 +106,8 @@ private:
 
 signals:
   void sequence_topic_signal(QString);
-  void robot_service_result_signal(QString);
-  void ev_status_result_signal(QString);
+  void resultCallRobotService(QString);
+  void resultGetEvStatus(QString);
 
 };
 
