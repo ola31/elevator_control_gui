@@ -11,51 +11,40 @@
 class OlaViewModel : public QObject
 {
   Q_OBJECT
-  //Q_PROPERTY(QString name_ola READ getDisplayMsg /*WRITE setName NOTIFY nameChanged*/)
-  Q_PROPERTY(bool is_stop_state READ getIsStopState /*WRITE setName*/ NOTIFY isStopStateChanged)
-  Q_PROPERTY(QImage main_image READ getMainImage /*WRITE setName*/ NOTIFY mainImageUpdated)
 
-  Q_PROPERTY(QString sequence READ get_sequence_topic NOTIFY sequence_recieve_notify)
+  Q_PROPERTY(QString sequence READ sequence WRITE setSequence NOTIFY sequenceChanged)
   Q_PROPERTY(
-    QString robot_service_result READ robot_service_status_read NOTIFY robot_service_responsed_notify)
+    QString robotServiceResult READ robotServiceResult WRITE setRobotServiceResult NOTIFY robotServiceResultChanged)
   Q_PROPERTY(
-    QString ev_status READ get_ev_status NOTIFY ev_status_responsed_notify)
+    QString evStatus READ evStatus WRITE setEvStatus NOTIFY evStatusChanged)
 
 public:
   explicit OlaViewModel(int argc, char ** argv, QObject * parent = nullptr);
   virtual ~OlaViewModel();
 
-  Q_INVOKABLE void ola_function(int ola_value);
-  Q_INVOKABLE void go_button_clicked();
-  Q_INVOKABLE void fb_step_changed(double fb_step_meter);
-  Q_INVOKABLE void rl_step_changed(double rl_step_meter);
-  Q_INVOKABLE void rl_turn_changed(double rl_turn_degree);
-  Q_INVOKABLE void apply_button_clicked();
 
-  Q_INVOKABLE void call_robot_service_button_clicked(
+  //Q PROPERTY Setter, Getter
+
+  QString sequence();
+  QString robotServiceResult();
+  QString evStatus();
+
+  Q_INVOKABLE void bttnCallRobotServiceClicked(
     int ev_num, QString call_floor,
     QString dest_floor);
-  Q_INVOKABLE void set_status_button_clicked(QString status);
-  Q_INVOKABLE void get_ev_status_button_clicked();
+  Q_INVOKABLE void bttnSetStatusClicked(QString status);
+  Q_INVOKABLE void bttnGetEvStatusClicked();
 
-
-  bool getIsStopState(void);
-  QImage getMainImage(void);
-  QString getDisplayMsg(void);
-
-  QString get_sequence_topic();
-  QString robot_service_status_read();
-  QString get_ev_status();
-
-private slots:
-  void updateMainImage();
+public slots:
+  void setSequence(QString value);
+  void setRobotServiceResult(QString value);
+  void setEvStatus(QString value);
 
 signals:
-  bool isStopStateChanged(void);
-  bool mainImageUpdated(void);
-  void sequence_recieve_notify(void);
-  void robot_service_responsed_notify();
-  void ev_status_responsed_notify();
+  //Q PROPERTY <NOTIFY>
+  void sequenceChanged();
+  void robotServiceResultChanged();
+  void evStatusChanged();
 
 protected:
   int m_olaValue = -1;
@@ -63,6 +52,10 @@ protected:
 private:
   std::thread spin_thread;
   std::shared_ptr<OlaModel> ola_model_;
+
+  QString m_sequence;
+  QString m_robotServiceResult;
+  QString m_evStatus;
 
 
 };

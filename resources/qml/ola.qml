@@ -36,6 +36,9 @@ Window {
                 id: splitView_left
                 orientation: Qt.Vertical
                 width:splitView1.width/2
+
+                /* EV STATUS BOX */
+
                 Rectangle {
                     color:'#588196'
                     border.color:'#588196'
@@ -52,18 +55,20 @@ Window {
                         button_off_color: 'black'
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
-                        onClicked: ola_view_model.get_ev_status_button_clicked();
+                        onClicked: ola_view_model.bttnGetEvStatusClicked();
                         info_text_size_gain: 1.4
-                        informations: ola_view_model.ev_status
+                        informations: ola_view_model.evStatus
                         Connections{
                             target: ola_view_model
-                            onEv_statusChanged: ev_status_box.update_info();
+                            onEvStatusChanged: ev_status_box.update_info();
                         }
 
 
                     }
 
                 }
+
+                /* ROBOT SERVICE BOX */
 
                 Rectangle {
                     color:'#CEAE88'
@@ -81,26 +86,30 @@ Window {
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
                         onClicked: {
-                            ola_view_model.call_robot_service_button_clicked(ev_num, call_floor, dest_floor);
+                            ola_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor);
                         }
-                        service_result : ola_view_model.robot_service_result
+                        service_result : ola_view_model.robotServiceResult
                     }
 
-
                 }
-
 
             }
             SplitView{
                 id: splitView_right
                 orientation: Qt.Vertical
                 width: splitView1.width/2
+
+                /* EMPTY BOX */
+
                 Rectangle {
                     color:'#EFF0F2'
                     border.color:'#EFF0F2'
                     Layout.fillWidth:true
                     height:parent.height/2
                 }
+
+                /* SEQUENCE VIEWER & SET ROBOT SERVICE BOX */
+
                 Rectangle {
                     color:'#588196'
                     border.color:'#588196'
@@ -139,8 +148,8 @@ Window {
                         background_color: parent.color
                         color_off: 'black'
                         color_on: 'limegreen'
-                        onTaking_on_clicked: ola_view_model.set_status_button_clicked("Taking On")
-                        onGetting_off_clicked: ola_view_model.set_status_button_clicked("Getting Off")
+                        onTaking_on_clicked: ola_view_model.bttnSetStatusClicked("Taking On")
+                        onGetting_off_clicked: ola_view_model.bttnSetStatusClicked("Getting Off")
                     }
                 }
 

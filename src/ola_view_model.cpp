@@ -8,6 +8,7 @@ OlaViewModel::OlaViewModel(int argc, char ** argv, QObject * parent)
   rclcpp::init(argc, argv);
   ola_model_ = std::make_shared<OlaModel>();
 
+  //ROS Spin Thread
   auto ros_spin = [this]() {
       rclcpp::executors::SingleThreadedExecutor exec;
       rclcpp::WallRate loop_rate(100);
@@ -21,21 +22,19 @@ OlaViewModel::OlaViewModel(int argc, char ** argv, QObject * parent)
     };
   spin_thread = std::thread(ros_spin);
 
-  connect(
-    ola_model_.get(), SIGNAL(image_callback_signal()), this,
-    SLOT(updateMainImage()));
+  // Model -> View Model Connection
 
   connect(
-    ola_model_.get(), SIGNAL(sequence_topic_signal()), this,
-    SIGNAL(sequence_recieve_notify()));
+    ola_model_.get(), SIGNAL(sequence_topic_signal(QString)), this,
+    SLOT(setSequence(QString)));
 
   connect(
-    ola_model_.get(), SIGNAL(robot_service_result_signal()), this,
-    SIGNAL(robot_service_responsed_notify()));
+    ola_model_.get(), SIGNAL(robot_service_result_signal(QString)), this,
+    SLOT(setRobotServiceResult(QString)));
 
   connect(
-    ola_model_.get(), SIGNAL(ev_status_result_signal()), this,
-    SIGNAL(ev_status_responsed_notify()));
+    ola_model_.get(), SIGNAL(ev_status_result_signal(QString)), this,
+    SIGNAL(setRobotServiceResult(QString)));
 
 }
 
@@ -45,14 +44,37 @@ OlaViewModel::~OlaViewModel()
 }
 
 
-QString OlaViewModel::get_sequence_topic() //new
+QString OlaViewModel::sequence()
 {
-  return QString::fromStdString(ola_model_->get_sequence());
+  return m_sequence;
+}
+void OlaViewModel::setSequence(QString value)
+{
+  m_sequence = value;
+  emit sequenceChanged();
 }
 
+QString OlaViewModel::robotServiceResult()
+{
+  return m_robotServiceResult;
+}
+void OlaViewModel::setRobotServiceResult(QString value)
+{
+  m_robotServiceResult = value;
+  emit robotServiceResultChanged();
+}
 
-void OlaViewModel::call_robot_service_button_clicked(
-  //new
+QString OlaViewModel::evStatus()
+{
+  return m_evStatus;
+}
+void OlaViewModel::setEvStatus(QString value)
+{
+  m_evStatus = value;
+  emit evStatusChanged();
+}
+
+void OlaViewModel::bttnCallRobotServiceClicked(
   int ev_num, QString call_floor,
   QString dest_floor)
 {
@@ -61,83 +83,12 @@ void OlaViewModel::call_robot_service_button_clicked(
   ola_model_->robot_service_call(ev_num, call_floor_, dest_floor_);
 }
 
-QString OlaViewModel::robot_service_status_read() //new
-{
-  bool result = ola_model_->get_robot_service_result();
-  if (result) {
-    return QString("True");
-  } else {
-    return QString("False");
-  }
-}
-
-void OlaViewModel::set_status_button_clicked(QString status)  //new
+void OlaViewModel::bttnSetStatusClicked(QString status)
 {
   ola_model_->set_robot_service(status.toStdString());
 }
 
-void OlaViewModel::get_ev_status_button_clicked() //new
+void OlaViewModel::bttnGetEvStatusClicked()
 {
   ola_model_->get_ev_status(0);
-}
-
-QString OlaViewModel::get_ev_status() //new
-{
-  //std::cout << ola_model_->get_ev_status_qstr().toStdString() << std::endl;
-  return ola_model_->get_ev_status_qstr();
-}
-
-
-void OlaViewModel::ola_function(int ola_value)
-{
-  std::cout << "hello qml world" << std::endl;
-}
-
-void OlaViewModel::go_button_clicked()
-{
-  ola_model_->update_is_stop();
-  emit isStopStateChanged();
-}
-
-bool OlaViewModel::getIsStopState(void)
-{
-  return ola_model_->get_is_stop();
-}
-
-void OlaViewModel::updateMainImage()
-{
-  emit mainImageUpdated();
-}
-
-QImage OlaViewModel::getMainImage(void)
-{
-  return ola_model_->get_main_image();
-}
-
-
-void OlaViewModel::apply_button_clicked()
-{
-  ola_model_->apply_changes();
-}
-
-
-void OlaViewModel::fb_step_changed(double fb_step_meter)
-{
-  return ola_model_->update_fb_step(fb_step_meter);
-}
-
-void OlaViewModel::rl_step_changed(double rl_step_meter)
-{
-  return ola_model_->update_rl_step(rl_step_meter);
-}
-
-void OlaViewModel::rl_turn_changed(double rl_turn_degree)
-{
-  return ola_model_->update_rl_turn(rl_turn_degree);
-}
-
-QString OlaViewModel::getDisplayMsg(void)
-{
-  QString ola_msg("olaola");
-  return ola_msg;
 }

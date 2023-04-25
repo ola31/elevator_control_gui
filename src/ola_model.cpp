@@ -5,8 +5,6 @@ OlaModel::OlaModel()
 {
   auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(20)).best_effort().durability_volatile();
   using namespace std::placeholders;
-//  pub_ = this->create_publisher<std_msgs::msg::Bool>("ola_topic", qos_profile);
-
 
   //Subscriber
   sequence_subscriber = this->create_subscription<elevator_interfaces::msg::RobotServiceSequence>(
@@ -29,47 +27,21 @@ OlaModel::OlaModel()
   set_robot_status_client = this->create_client<elevator_interfaces::srv::SetRobotService>(
     "set_robot_service");
 
-//  auto ros_spin = [this]() {
-//      rclcpp::executors::SingleThreadedExecutor exec;
-//      rclcpp::WallRate loop_rate(100);
-
-//      while (rclcpp::ok()) {
-//        exec.spin_node_some(shared_from_this());
-//        loop_rate.sleep();
-//      }
-//      return;
-//    };
-//  spin_thread = std::thread(ros_spin);
-
-
 }
 
 OlaModel::~OlaModel()
 {
 }
 
-void OlaModel::publish_()
-{
-  //auto msg = std_msgs::msg::Bool();
-  std_msgs::msg::Bool msg;
-  msg.data = true;
-}
-
-void OlaModel::is_stop_pub(bool is_stop_)
-{
-  //auto msg = std_msgs::msg::Bool();
-  std_msgs::msg::Bool msg;
-  msg.data = is_stop;
-}
 
 void OlaModel::robot_service_seqeunce_callback(
   const elevator_interfaces::msg::RobotServiceSequence::SharedPtr msg)
 {
   //RCLCPP_INFO(this->get_logger(), "sequence : %s", msg->sequence.c_str());
   this->sequence = msg->sequence;
-  emit sequence_topic_signal();
-
+  emit sequence_topic_signal(QString::fromStdString(this->sequence));
 }
+
 
 void OlaModel::robot_service_call(int ev_num, std::string call_floor, std::string dest_floor)
 {
@@ -85,7 +57,14 @@ void OlaModel::robot_service_call(int ev_num, std::string call_floor, std::strin
       //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result.c_str());
       bool result = response->result;
       this->robot_service_result = result;
-      emit robot_service_result_signal(); //signal
+      QString result_qstr;
+      if (result) {
+        result_qstr = QString("True");
+      } else {
+        result_qstr = QString("False");
+      }
+
+      emit robot_service_result_signal(result_qstr); //signal
       return;
     };
 
@@ -106,14 +85,6 @@ void OlaModel::elevator_service_call(int ev_num, std::string direction, std::str
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
       bool result = response->result;
-
-//      QString result_qstr;
-//      if (result) {
-//        result_qstr = "True";
-//      } else {
-//        result_qstr = "False";
-//      }
-
       return;
     };
 
@@ -192,12 +163,67 @@ void OlaModel::get_ev_status(int ev_num)
       ev_status_map["error_code"] = error_code_s;
       ev_status_map["group"] = group_s;
 
-      emit ev_status_result_signal();
+      emit ev_status_result_signal(get_ev_status_qstr());
       return;
     };
 
   auto future_result =
     get_ev_status_client->async_send_request(request, response_received_callback);
+}
+
+std::string OlaModel::array_msg_to_string(std::vector<int8_t> array_msg)
+{
+  std::string result = std::string("[");
+  for (int i = 0; i < array_msg.size(); i++) {
+    result = result + std::to_string(array_msg[i]);
+    if (i < array_msg.size() - 1) {
+      result = result + ", ";
+    }
+  }
+  result = result + "]";
+  return result;
+}
+
+
+std::string OlaModel::array_msg_to_string(std::vector<int32_t> array_msg)
+{
+  std::string result = std::string("[");
+  for (int i = 0; i < array_msg.size(); i++) {
+    result = result + std::to_string(array_msg[i]);
+    if (i < array_msg.size() - 1) {
+      result = result + ", ";
+    }
+  }
+  result = result + "]";
+  return result;
+}
+
+
+std::string OlaModel::array_msg_to_string(std::vector<std::string> array_msg)
+{
+  std::string result = std::string("[");
+  for (int i = 0; i < array_msg.size(); i++) {
+    result = result + array_msg[i];
+    if (i < array_msg.size() - 1) {
+      result = result + ", ";
+    }
+  }
+  result = result + "]";
+  return result;
+}
+
+QString OlaModel::get_ev_status_qstr()
+{
+  std::string ev_status_stdstr("");
+  std::map<std::string, std::string>::iterator it;
+  for (it = ev_status_map.begin(); it != ev_status_map.end(); it++) {
+    if (it == ev_status_map.begin()) {
+      ev_status_stdstr = ev_status_stdstr + it->first + ":" + it->second;
+    } else {
+      ev_status_stdstr = ev_status_stdstr + "/" + it->first + ":" + it->second;
+    }
+  }
+  return QString::fromStdString(ev_status_stdstr);
 }
 
 
@@ -221,130 +247,11 @@ void OlaModel::set_robot_service(std::string robot_status)
 }
 
 
-std::string OlaModel::array_msg_to_string(std::vector<int8_t> array_msg)
-{
-//  //int size = (sizeof(array_msg) / sizeof(*array_msg));
-//  std::string result = std::string("[");
-//  for (int i = 0; i < size; i++) {
-//    result = result + std::to_string(array_msg[i]);
-//    if (i < size - 1) {
-//      result = result + ", ";
-//    }
-//  }
-//  result = result + "]";
-//  return result;
-  std::string result = std::string("[");
-  for (int i = 0; i < array_msg.size(); i++) {
-    result = result + std::to_string(array_msg[i]);
-    if (i < array_msg.size() - 1) {
-      result = result + ", ";
-    }
-  }
-  result = result + "]";
-  return result;
-}
-
-std::string OlaModel::array_msg_to_string(std::vector<int32_t> array_msg)
-{
-//  int size = (sizeof(array_msg) / sizeof(*array_msg));
-//  std::string result = std::string("[");
-//  for (int i = 0; i < size; i++) {
-//    result = result + std::to_string(array_msg[i]);
-//    if (i < size - 1) {
-//      result = result + ", ";
-//    }
-//  }
-//  result = result + "]";
-//  return result;
-  std::string result = std::string("[");
-  for (int i = 0; i < array_msg.size(); i++) {
-    result = result + std::to_string(array_msg[i]);
-    if (i < array_msg.size() - 1) {
-      result = result + ", ";
-    }
-  }
-  result = result + "]";
-  return result;
-}
-
-std::string OlaModel::array_msg_to_string(std::vector<std::string> array_msg)
-{
-  std::string result = std::string("[");
-  for (int i = 0; i < array_msg.size(); i++) {
-    result = result + array_msg[i];
-    if (i < array_msg.size() - 1) {
-      result = result + ", ";
-    }
-  }
-  result = result + "]";
-  return result;
-}
-
-
 bool OlaModel::get_robot_service_result()
 {
   return robot_service_result;
 }
 
-
-QString OlaModel::get_ev_status_qstr()
-{
-  //return this->ev_status_map;
-  std::string ev_status_stdstr("");
-  std::map<std::string, std::string>::iterator it;
-  for (it = ev_status_map.begin(); it != ev_status_map.end(); it++) {
-    if (it == ev_status_map.begin()) {
-      ev_status_stdstr = ev_status_stdstr + it->first + ":" + it->second;
-    } else {
-      ev_status_stdstr = ev_status_stdstr + "/" + it->first + ":" + it->second;
-    }
-  }
-  return QString::fromStdString(ev_status_stdstr);
-}
-
-QImage OlaModel::get_main_image()
-{
-  return image_;
-}
-
-void OlaModel::apply_changes()
-{
-  std_msgs::msg::Float64 msg1;
-  std_msgs::msg::Float64 msg2;
-  std_msgs::msg::Float64 msg3;
-  msg1.data = fb_step;
-  msg2.data = rl_step;
-  msg3.data = rl_turn;
-}
-
-void OlaModel::update_is_stop()
-{
-  is_stop = is_stop ? false : true;
-  is_stop_pub(is_stop);
-}
-
-void OlaModel::update_fb_step(double fb_step_meter)
-{
-  fb_step = fb_step_meter;
-}
-
-void OlaModel::update_rl_step(double rl_step_meter)
-{
-  rl_step = rl_step_meter;
-}
-
-void OlaModel::update_rl_turn(double rl_turn_degree)
-{
-  rl_turn = rl_turn_degree;
-}
-
-bool OlaModel::get_is_stop()
-{
-  return is_stop;
-}
-
-
-//
 
 std::string OlaModel::get_sequence()
 {
