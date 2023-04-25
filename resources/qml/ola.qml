@@ -13,7 +13,7 @@ Window {
     property int h_: 1080
     width: w_
     height: h_
-    title: "ola_window"
+    title: "EV TEST GUI"//"ola_window"
     visible: true
     color : "#334457"//"black"
     Rectangle {
@@ -42,6 +42,7 @@ Window {
                     Layout.fillWidth:true
                     height:parent.height/2
                     Ev_status_box{
+                        id : ev_status_box
                         width_: parent.width
                         height_:parent.height
                         color_: parent.color
@@ -51,6 +52,15 @@ Window {
                         button_off_color: 'black'
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
+                        onClicked: ola_view_model.get_ev_status_button_clicked();
+                        info_text_size_gain: 1.4
+                        informations: ola_view_model.ev_status
+                        Connections{
+                            target: ola_view_model
+                            onEv_statusChanged: ev_status_box.update_info();
+                        }
+
+
                     }
 
                 }
@@ -70,7 +80,12 @@ Window {
                         button_off_color: 'black'
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
+                        onClicked: {
+                            ola_view_model.call_robot_service_button_clicked(ev_num, call_floor, dest_floor);
+                        }
+                        service_result : ola_view_model.robot_service_result
                     }
+
 
                 }
 
@@ -124,9 +139,8 @@ Window {
                         background_color: parent.color
                         color_off: 'black'
                         color_on: 'limegreen'
-                        //onTaking_on_clicked: //sequence_viewer.blink()
-
-
+                        onTaking_on_clicked: ola_view_model.set_status_button_clicked("Taking On")
+                        onGetting_off_clicked: ola_view_model.set_status_button_clicked("Getting Off")
                     }
                 }
 

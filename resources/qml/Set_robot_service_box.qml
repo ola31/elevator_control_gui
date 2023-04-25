@@ -41,7 +41,7 @@ Item {
             top:parent.top
             right:parent.right
         }
-        onClicked: set_robot_service_box.getting_off_clicked
+        onClicked: set_robot_service_box.getting_off_clicked()
         color_off: set_robot_service_box.color_off
         color_on: set_robot_service_box.color_on
         background_color: set_robot_service_box.background_color

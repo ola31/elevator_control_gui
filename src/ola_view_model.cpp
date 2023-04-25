@@ -29,7 +29,13 @@ OlaViewModel::OlaViewModel(int argc, char ** argv, QObject * parent)
     ola_model_.get(), SIGNAL(sequence_topic_signal()), this,
     SIGNAL(sequence_recieve_notify()));
 
-  //sequence_topic_signal
+  connect(
+    ola_model_.get(), SIGNAL(robot_service_result_signal()), this,
+    SIGNAL(robot_service_responsed_notify()));
+
+  connect(
+    ola_model_.get(), SIGNAL(ev_status_result_signal()), this,
+    SIGNAL(ev_status_responsed_notify()));
 
 }
 
@@ -42,6 +48,43 @@ OlaViewModel::~OlaViewModel()
 QString OlaViewModel::get_sequence_topic() //new
 {
   return QString::fromStdString(ola_model_->get_sequence());
+}
+
+
+void OlaViewModel::call_robot_service_button_clicked(
+  //new
+  int ev_num, QString call_floor,
+  QString dest_floor)
+{
+  std::string call_floor_ = call_floor.toStdString();
+  std::string dest_floor_ = dest_floor.toStdString();
+  ola_model_->robot_service_call(ev_num, call_floor_, dest_floor_);
+}
+
+QString OlaViewModel::robot_service_status_read() //new
+{
+  bool result = ola_model_->get_robot_service_result();
+  if (result) {
+    return QString("True");
+  } else {
+    return QString("False");
+  }
+}
+
+void OlaViewModel::set_status_button_clicked(QString status)  //new
+{
+  ola_model_->set_robot_service(status.toStdString());
+}
+
+void OlaViewModel::get_ev_status_button_clicked() //new
+{
+  ola_model_->get_ev_status(0);
+}
+
+QString OlaViewModel::get_ev_status() //new
+{
+  //std::cout << ola_model_->get_ev_status_qstr().toStdString() << std::endl;
+  return ola_model_->get_ev_status_qstr();
 }
 
 

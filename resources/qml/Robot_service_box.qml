@@ -16,6 +16,15 @@ Item {
     property string button_off_color: 'black'
     property string button_on_color: 'limegreen'
     property string button_background_color: 'grey'
+    property string font_color: 'black'
+
+    property int ev_num: 0
+    property string call_floor: 'none'
+    property string dest_floor: 'none'
+
+    property string service_result: 'none'
+
+    signal clicked()
 
     Rectangle {
         id: box1
@@ -39,7 +48,7 @@ Item {
             color_on: button_on_color
             background_color: button_background_color
             onClicked: {
-                //
+                robot_service_box.clicked();
             }
 
         }
@@ -154,16 +163,97 @@ Item {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    TextField {
+                        id: textField_ev_num
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        width : parent.width
+                        height: parent.height
+                        placeholderText: qsTr("type here")
+                        font.pointSize: height*0.4
+                        font.bold: true
+                        onTextChanged: {
+//                            var centimeter = parseFloat(text);
+//                            centimeter = centimeter.toFixed(1)
+//                            if(!(text.length<3) &&
+//                               !(text.charAt(0) == '-' && text.length<4) &&
+//                               !isNaN(centimeter)){
+//                                 fb_step_slider.value = centimeter.toString();
+//                            }
+                            ev_num = parseInt(text);
+                        }
+                        style: TextFieldStyle {
+                            textColor: font_color
+                            background: Rectangle {
+                                radius: 2
+                                color : color1
+                                width : parent.width
+                                height: parent.height
+                                border.color: color
+                                border.width: 1
+                            }
+                        }
+                    }
                 }
                 Rectangle {
                     color:color2
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
+                    TextField {
+                        id: textField_call_floor
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        width : parent.width
+                        height: parent.height
+
+                        placeholderText: qsTr("type here")
+                        font.pointSize: height*0.4
+                        font.bold: true
+                        onTextChanged: {
+                            call_floor = text
+                        }
+                        style: TextFieldStyle {
+                            textColor: font_color
+                            background: Rectangle {
+                                radius: 2
+                                color : color2
+                                width : parent.width
+                                height: parent.height
+                                border.color: color
+                                border.width: 1
+                            }
+                        }
+                    }
                 }
                 Rectangle {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    TextField {
+                        id: textField_dest_floor
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        width : parent.width
+                        height: parent.height
+                        placeholderText: qsTr("type here")
+                        font.pointSize: height*0.4
+                        font.bold: true
+                        onTextChanged: {
+                            dest_floor = text
+                        }
+                        style: TextFieldStyle {
+                            textColor: font_color
+                            background: Rectangle {
+                                radius: 2
+                                color : color1
+                                width : parent.width
+                                height: parent.height
+                                border.color: color
+                                border.width: 1
+                            }
+                        }
+                    }
                 }
 
             }
@@ -211,6 +301,16 @@ Item {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text{
+                        id: text22
+                        width:parent.width
+                        height:parent.height
+                        text: robot_service_box.service_result
+                        color : 'black'
+                        font.pixelSize: parent.width*0.25
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
 
             }

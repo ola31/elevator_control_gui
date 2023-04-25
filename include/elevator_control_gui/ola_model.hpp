@@ -13,6 +13,8 @@
 #include <stdint.h>
 #include <thread>
 
+#include <map>
+
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "std_msgs/msg/float64.hpp"
@@ -96,11 +98,26 @@ public:
 
   //
   std::string get_sequence();
+  bool get_robot_service_result();
+  QString get_ev_status_qstr();
 
 private:
   std::thread spin_thread;
 
   std::string sequence;
+  bool robot_service_result;
+
+  std::string ev_num_s;
+  std::string ev_name_s;
+  std::string floor_s;
+  std::string direction_s;
+  std::string run_s;
+  std::string door_s;
+  std::string mode_s;
+  std::string error_code_s;
+  std::string group_s;
+
+  std::map<std::string, std::string> ev_status_map;
 
 
   bool is_stop = true;
@@ -113,12 +130,16 @@ private:
     const elevator_interfaces::msg::RobotServiceSequence::SharedPtr msg);
 
 
-  std::string array_msg_to_string(int8_t array_msg[]);
+  std::string array_msg_to_string(std::vector<int8_t> array_msg);
+  std::string array_msg_to_string(std::vector<int32_t> array_msg);
   std::string array_msg_to_string(std::vector<std::string> array_msg);
 
 signals:
   void image_callback_signal();
   void sequence_topic_signal();
+  void robot_service_result_signal();
+  void ev_status_result_signal();
+
 };
 
 

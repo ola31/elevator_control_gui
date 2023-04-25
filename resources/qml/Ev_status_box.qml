@@ -17,6 +17,36 @@ Item {
     property string button_on_color: 'limegreen'
     property string button_background_color: 'grey'
 
+    property double info_text_size_gain: 1.0
+
+    property string informations: ''
+
+    property string ev_num: ''
+    property string ev_name: ''
+    property string floor: ''
+    property string direction: ''
+    property string run: ''
+    property string door: ''
+    property string mode: ''
+
+    signal clicked();
+
+    function update_info(){
+        var dict = {}
+        var list = ola_view_model.ev_status.split('/')
+        for(var i in list){
+            var list2 = list[i].split(':');
+            dict[list2[0]] = list2[1]
+        }
+        ev_status_box.ev_num = dict['ev_num'];
+        ev_status_box.ev_name = dict['ev_name'];
+        ev_status_box.floor = dict['floor'];
+        ev_status_box.direction = dict['direction'];
+        ev_status_box.run = dict['run'];
+        ev_status_box.door = dict['door'];
+        ev_status_box.mode = dict['mode'];
+    }
+
     Rectangle {
         id: box1
         color:color_
@@ -54,11 +84,7 @@ Item {
                 }
                 color: (button_get_ev_status.pressed_)?button_on_color:button_off_color
             }
-            onClicked: {
-                //textField_fb_step.text = "0.0";
-                //textField_rl_step.text = "0.0";
-                //textField_rl_turn.text = "0.0";
-            }
+            onClicked: ev_status_box.clicked();
             onPressedChanged : pressed_ = (pressed_) ? false : true
         }
 
@@ -193,36 +219,106 @@ Item {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text11
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.ev_num
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Rectangle {
                     color:color2
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text22
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.ev_name
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Rectangle {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text33
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.floor
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Rectangle {
                     color:color2
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text44
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.direction
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Rectangle {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text55
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.run
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Rectangle {
                     color:color2
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text66
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.door
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Rectangle {
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Text {
+                        id: text77
+                        width:parent.width
+                        height:parent.height
+                        text: ev_status_box.mode
+                        color : 'black'
+                        font.pixelSize: parent.height*0.4*info_text_size_gain
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
         }
