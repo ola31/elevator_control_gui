@@ -58,10 +58,6 @@ Item {
             color: (round_squre_button.pressed_)?color_on:color_off
         }
         onClicked: round_squre_button.clicked();
-            //textField_fb_step.text = "0.0";
-            //textField_rl_step.text = "0.0";
-            //textField_rl_turn.text = "0.0";
-
         onPressedChanged : pressed_ = (pressed_) ? false : true
     }
 

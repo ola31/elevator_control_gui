@@ -207,8 +207,6 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
-
-
             }
             ColumnLayout{
                 id: colunmLayout2
@@ -323,7 +321,6 @@ Item {
             }
         }
     }
-
 }
 
 

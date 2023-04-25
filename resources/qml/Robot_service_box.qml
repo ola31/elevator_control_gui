@@ -52,46 +52,6 @@ Item {
             }
 
         }
-/*
-        Button{
-            id: button_call_robot_serivce
-            height : parent.height*0.22
-            width: height
-            property bool pressed_: false
-            anchors{
-                left :parent.left
-                leftMargin: parent.width*0.7
-                top : parent.top
-                topMargin: parent.height*0.2
-            }
-            style: ButtonStyle{
-              background: Rectangle{
-                  color: button_background_color
-                  border.width: button_call_robot_serivce.width*0.05
-                  border.color : (button_call_robot_serivce.pressed_)?button_on_color:button_off_color
-                  radius: button_call_robot_serivce.width*0.2
-              }
-            }
-
-            Text {
-                id : text_set_all_zero
-                text:"Call\nRobot\nService"
-                font.pixelSize: text_set_all_zero.width * 0.2
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors{
-                    fill:parent
-                }
-                color: (button_call_robot_serivce.pressed_)?button_on_color:button_off_color
-            }
-            onClicked: {
-                //textField_fb_step.text = "0.0";
-                //textField_rl_step.text = "0.0";
-                //textField_rl_turn.text = "0.0";
-            }
-            onPressedChanged : pressed_ = (pressed_) ? false : true
-        }
-*/
 
         RowLayout {
             id: rowLayout1
@@ -151,8 +111,6 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
-
-
             }
             ColumnLayout{
                 id: colunmLayout2
@@ -255,9 +213,7 @@ Item {
                         }
                     }
                 }
-
             }
-
         }
 
 
@@ -289,8 +245,6 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
-
-
             }
             ColumnLayout{
                 id: colunmLayout4
@@ -312,11 +266,9 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
-
             }
         }
     }
-
 }
 
 

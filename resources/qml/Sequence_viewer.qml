@@ -13,7 +13,6 @@ Item {
     property string text: 'default_text'
 
 
-
     Timer {
         id : blink_timer
         interval : 50
