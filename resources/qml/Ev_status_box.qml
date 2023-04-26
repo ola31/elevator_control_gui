@@ -224,7 +224,7 @@ Item {
                         text: ev_status_box.ev_num
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -239,7 +239,7 @@ Item {
                         text: ev_status_box.ev_name
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -254,7 +254,7 @@ Item {
                         text: ev_status_box.floor
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -269,7 +269,7 @@ Item {
                         text: ev_status_box.direction
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -284,7 +284,7 @@ Item {
                         text: ev_status_box.run
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -299,7 +299,7 @@ Item {
                         text: ev_status_box.door
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -314,7 +314,7 @@ Item {
                         text: ev_status_box.mode
                         color : 'black'
                         font.pixelSize: parent.height*0.4*info_text_size_gain
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -351,8 +351,8 @@ Item {
                 topMargin: parent.height*0.13
                 rightMargin: parent.width*0.05
             }
-            width : parent.width*0.4
-            height: width*0.2
+            width : parent.width*0.45
+            height: width*0.18
 
             onCheckedChanged: {
                 ischecked = ischecked ? false : true
@@ -365,7 +365,7 @@ Item {
                 function set_text(value){
                     text = value;
                 }
-                width: parent.width*0.85
+                width: parent.width*0.8
                 height: parent.height
                 text: "repeat every 1 sec"
                 font.pixelSize: height*0.5
@@ -437,493 +437,6 @@ Item {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

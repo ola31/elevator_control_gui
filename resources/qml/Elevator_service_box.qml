@@ -4,7 +4,7 @@ import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.3
 import "."
 Item {
-    id: robot_service_box
+    id: elevator_service_box
 
     property int width_: 500
     property int height_: 500
@@ -50,7 +50,7 @@ Item {
             color_on: button_on_color
             background_color: button_background_color
             onClicked: {
-                robot_service_box.cancelClicked();
+                elevator_service_box.cancelClicked();
             }
 
         }
@@ -71,7 +71,7 @@ Item {
             color_on: bytton_cancel_on_color
             background_color: button_cancel_background_color
             onClicked: {
-                robot_service_box.clicked();
+                elevator_service_box.clicked();
             }
             radius_gain: 3
             text_size_gain: 0.9
@@ -114,7 +114,7 @@ Item {
                         id: text2
                         width:parent.width
                         height:parent.height
-                        text: qsTr("call_floor")
+                        text: qsTr("direction")
                         color : 'black'
                         font.pixelSize: parent.width*0.2
                         horizontalAlignment: Text.AlignHCenter
@@ -129,7 +129,7 @@ Item {
                         id: text3
                         width:parent.width
                         height:parent.height
-                        text: qsTr("dest_floor")
+                        text: qsTr("floor")
                         color : 'black'
                         font.pixelSize: parent.width*0.2
                         horizontalAlignment: Text.AlignHCenter
@@ -284,7 +284,7 @@ Item {
                         id: text22
                         width:parent.width
                         height:parent.height
-                        text: robot_service_box.service_result
+                        text: elevator_service_box.service_result
                         color : 'black'
                         font.pixelSize: parent.width*0.25
                         horizontalAlignment: Text.AlignHCenter
@@ -295,6 +295,7 @@ Item {
         }
     }
 }
+
 
 
 
