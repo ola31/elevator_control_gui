@@ -92,3 +92,8 @@ void OlaViewModel::bttnGetEvStatusClicked()
 {
   ola_model_->get_ev_status(0);
 }
+
+void OlaViewModel::bttnCancelRobotServiceClicked()
+{
+  ola_model_->cancel_robot_service();
+}

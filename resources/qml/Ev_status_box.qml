@@ -320,8 +320,592 @@ Item {
                 }
             }
         }
+
+        Timer {
+            id : repeat_timer
+            interval : 500
+            repeat: true
+            running: false
+            property int cnt: 0
+            onTriggered:{
+                cnt += 1;
+                if(cnt==1) {
+                    ev_status_box.clicked();
+                    button_get_ev_status.pressed_ = true;
+                }
+                else if(cnt==2){
+                    button_get_ev_status.pressed_ = false;
+                    cnt = 0
+                }
+            }
+        }
+
+        CheckBox {
+            id: checkBox
+
+            property bool ischecked: false
+
+            anchors{
+                top:parent.top
+                right: parent.right
+                topMargin: parent.height*0.13
+                rightMargin: parent.width*0.05
+            }
+            width : parent.width*0.4
+            height: width*0.2
+
+            onCheckedChanged: {
+                ischecked = ischecked ? false : true
+                repeat_timer.running = ischecked
+                if (!ischecked) button_get_ev_status.pressed_ = false;
+            }
+
+            Text{
+                id : repeat_every_n_sec_text
+                function set_text(value){
+                    text = value;
+                }
+                width: parent.width*0.85
+                height: parent.height
+                text: "repeat every 1 sec"
+                font.pixelSize: height*0.5
+                anchors.verticalCenterOffset: 0
+                //anchors.horizontalCenterOffset: 0
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+
+            }
+            style: CheckBoxStyle {
+                indicator: Rectangle {
+                        implicitWidth: checkBox.height*0.6
+                        implicitHeight: implicitWidth
+                        radius: 3
+                        border.color: control.activeFocus ? "darkblue" : "black"
+                        border.width: 1
+                        Rectangle {
+                            visible: control.checked
+                            color: button_on_color//"#555"
+                            border.color: button_on_color
+                            radius: 2
+                            anchors.margins: 3
+                            anchors.fill: parent
+
+                        }
+                        Text { // check
+                          visible: control.checked
+                          anchors.centerIn: parent
+                          text: '\u2713' // CHECK MARK
+                          font.pixelSize: parent.height
+                        }
+                }
+            }
+
+        }
+
+        Rectangle{
+            color : parent.color
+            anchors{
+                top : parent.top
+                topMargin: parent.height*0.25
+                right : parent.right
+                rightMargin: parent.width*0.05
+            }
+            width: parent.width*0.45
+            height: width*0.1
+
+            Slider {
+                id: element
+                anchors{
+                    verticalCenter: parent.verticalCenter
+                    right : parent.right
+                }
+
+                width: parent.width
+                height: parent.height
+                stepSize: 1
+                minimumValue: 1
+                maximumValue: 5
+                value : 1
+                onValueChanged: {
+                    var text_value = 'repeat every ' + String(value) + ' sec'
+                    repeat_every_n_sec_text.set_text(text_value)
+                    repeat_timer.interval = value*500;
+                }
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

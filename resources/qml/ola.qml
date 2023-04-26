@@ -85,9 +85,9 @@ Window {
                         button_off_color: 'black'
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
-                        onClicked: {
-                            ola_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor);
-                        }
+                        button_cancel_background_color : '#588196'// '#334457'
+                        onClicked: ola_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor);
+                        onCancelClicked: ola_view_model.bttnCancelRobotServiceClicked();
                         service_result : ola_view_model.robotServiceResult
                     }
                 }
@@ -125,7 +125,7 @@ Window {
                             top:parent.top
                             topMargin: parent.height*0.2
                         }
-                        text: ola_view_model.sequence
+                        text: qsTr(ola_view_model.sequence)
 
                         Connections{
                             target: ola_view_model

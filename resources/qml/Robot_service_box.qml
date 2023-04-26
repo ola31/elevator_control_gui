@@ -7,6 +7,7 @@ import QtQuick.Layouts 1.3
 import "."
 Item {
     id: robot_service_box
+
     property int width_: 500
     property int height_: 500
     property string color_: 'grey'
@@ -15,7 +16,9 @@ Item {
     property string color2: 'green'
     property string button_off_color: 'black'
     property string button_on_color: 'limegreen'
+    property string bytton_cancel_on_color: 'red'
     property string button_background_color: 'grey'
+    property string button_cancel_background_color : 'grey'
     property string font_color: 'black'
 
     property int ev_num: 0
@@ -25,6 +28,7 @@ Item {
     property string service_result: 'none'
 
     signal clicked()
+    signal cancelClicked()
 
     Rectangle {
         id: box1
@@ -48,8 +52,31 @@ Item {
             color_on: button_on_color
             background_color: button_background_color
             onClicked: {
+                robot_service_box.cancelClicked();
+            }
+
+        }
+
+
+        Round_squere_button{
+            id: cancel_button
+            height: parent.height*0.2
+            width: height
+            text:'Cancel\nRobot\nService'
+            anchors{
+                left : parent.left
+                leftMargin : parent.width*0.7
+                top : parent.top
+                topMargin: parent.height*0.7
+            }
+            color_off: button_off_color
+            color_on: bytton_cancel_on_color
+            background_color: button_cancel_background_color
+            onClicked: {
                 robot_service_box.clicked();
             }
+            radius_gain: 3
+            text_size_gain: 0.9
 
         }
 
@@ -270,12 +297,6 @@ Item {
         }
     }
 }
-
-
-
-
-
-
 
 
 

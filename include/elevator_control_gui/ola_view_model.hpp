@@ -34,6 +34,7 @@ public:
     QString dest_floor);
   Q_INVOKABLE void bttnSetStatusClicked(QString status);
   Q_INVOKABLE void bttnGetEvStatusClicked();
+  Q_INVOKABLE void bttnCancelRobotServiceClicked();
 
 public slots:
   void setSequence(QString value);
@@ -55,7 +56,7 @@ private:
 
   QString m_sequence;
   QString m_robotServiceResult;
-  QString m_evStatus;
+  QString m_evStatus = "";
 
 
 };
