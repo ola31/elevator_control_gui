@@ -77,9 +77,9 @@ add_executable(elevator_control_gui ${elevator_control_gui_cpp_SRCS} ${elevator_
 #target_link_libraries(elevator_control_gui Qt5::Core)
 #target_link_libraries(elevator_control_gui Qt5::Qml Qt5::Quick)
 
-target_link_libraries(elevator_control_gui Qt5::Core ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Core.so.5)
-target_link_libraries(elevator_control_gui Qt5::Qml ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Qml.so.5)
-target_link_libraries(elevator_control_gui Qt5::Quick ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Quick.so.5)
+target_link_libraries(elevator_control_gui Qt5::Core ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Core.so.5.12.8)
+target_link_libraries(elevator_control_gui Qt5::Qml ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Qml.so.5.12.8)
+target_link_libraries(elevator_control_gui Qt5::Quick ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Quick.so.5.12.8)
 #target_link_libraries(elevator_control_gui Qt5::QuickControls2)
 
 ament_target_dependencies(elevator_control_gui ${elevator_control_gui_dependencies})
@@ -92,12 +92,12 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-# install(FILES /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
-#         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-# install(FILES /usr/lib/x86_64-linux-gnu/libQt5Qml.so.5
-#         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-# install(FILES /usr/lib/x86_64-linux-gnu/libQt5Quick.so.5
-#         DESTINATION lib)
+# install(LIBRARIES /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+#         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib2)
+# install(LIBRARIES /usr/lib/x86_64-linux-gnu/libQt5Qml.so.5
+#         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib2)
+# install(LIBRARIES /usr/lib/x86_64-linux-gnu/libQt5Quick.so.5
+#         DESTINATION lib2)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
