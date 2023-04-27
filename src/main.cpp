@@ -26,7 +26,7 @@
 ** Main
 *****************************************************************************/
 
-using namespace QtQml;
+//using namespace QtQml;
 
 int main(int argc, char ** argv)
 {
@@ -45,16 +45,9 @@ int main(int argc, char ** argv)
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 
   engine.load(QUrl(QStringLiteral("qrc:/qml/ola.qml")));
-  //engine.load(QUrl(QStringLiteral("/home/ola/robot_ws/src/kubot_gui/resources/qml/ola.qml")));
+//engine.load(QUrl(QStringLiteral("/home/ola/robot_ws/src/kubot_gui/resources/qml/ola.qml")));
 
 
   return app.exec();
 
-
-  //kubot_gui::MainWindow w(argc,argv);
-  //w.show();
-  //app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
-  //int result = app.exec();
-
-  //return result;
 }

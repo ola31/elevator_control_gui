@@ -28,7 +28,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS LinguistTools)
-find_package(Qt5 COMPONENTS Qml Quick Gui REQUIRED)
+find_package(Qt5 COMPONENTS Core Qml Quick Gui REQUIRED)
 find_package(ament_cmake REQUIRED)
 #find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -36,14 +36,7 @@ find_package(std_msgs)
 find_package(elevator_interfaces)
 
 
-
 include_directories(include)
-
-#file(GLOB QT_FORMS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ui/*.ui)
-#file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
-#file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS include/kubot_gui/*.hpp)
-
-#add_executable(kubot_gui${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HPP} ${QT_MOC_HPP})
 
 set(elevator_control_gui_cpp_SRCS
   src/main.cpp
@@ -81,8 +74,13 @@ set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM 1)
 
 
 add_executable(elevator_control_gui ${elevator_control_gui_cpp_SRCS} ${elevator_control_gui_cpp_MOCS} ${elevator_control_gui_cpp_UIS_H} ${elevator_control_gui_RCC})
-target_link_libraries(elevator_control_gui Qt5::Core)
-target_link_libraries(elevator_control_gui Qt5::Qml Qt5::Quick)
+#target_link_libraries(elevator_control_gui Qt5::Core)
+#target_link_libraries(elevator_control_gui Qt5::Qml Qt5::Quick)
+
+target_link_libraries(elevator_control_gui Qt5::Core ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Core.so.5)
+target_link_libraries(elevator_control_gui Qt5::Qml ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Qml.so.5)
+target_link_libraries(elevator_control_gui Qt5::Quick ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Quick.so.5)
+#target_link_libraries(elevator_control_gui Qt5::QuickControls2)
 
 ament_target_dependencies(elevator_control_gui ${elevator_control_gui_dependencies})
 
@@ -93,6 +91,13 @@ install(
   DIRECTORY resources
   DESTINATION share/${PROJECT_NAME}
 )
+
+# install(FILES /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+#         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+# install(FILES /usr/lib/x86_64-linux-gnu/libQt5Qml.so.5
+#         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+# install(FILES /usr/lib/x86_64-linux-gnu/libQt5Quick.so.5
+#         DESTINATION lib)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
