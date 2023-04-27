@@ -85,6 +85,13 @@ void OlaModel::elevator_service_call(int ev_num, std::string direction, std::str
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
       bool result = response->result;
+      QString result_qstr;
+      if (result) {
+        result_qstr = QString("True");
+      } else {
+        result_qstr = QString("False");
+      }
+      emit resultElevatorService(result_qstr); //signal
       return;
     };
 

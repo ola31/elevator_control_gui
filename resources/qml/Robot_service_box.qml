@@ -50,9 +50,8 @@ Item {
             color_on: button_on_color
             background_color: button_background_color
             onClicked: {
-                robot_service_box.cancelClicked();
+                robot_service_box.clicked();
             }
-
         }
 
 
@@ -71,11 +70,10 @@ Item {
             color_on: bytton_cancel_on_color
             background_color: button_cancel_background_color
             onClicked: {
-                robot_service_box.clicked();
+                robot_service_box.cancelClicked();
             }
             radius_gain: 3
             text_size_gain: 0.9
-
         }
 
         RowLayout {
@@ -156,13 +154,6 @@ Item {
                         font.pointSize: height*0.4
                         font.bold: true
                         onTextChanged: {
-//                            var centimeter = parseFloat(text);
-//                            centimeter = centimeter.toFixed(1)
-//                            if(!(text.length<3) &&
-//                               !(text.charAt(0) == '-' && text.length<4) &&
-//                               !isNaN(centimeter)){
-//                                 fb_step_slider.value = centimeter.toString();
-//                            }
                             ev_num = parseInt(text);
                         }
                         style: TextFieldStyle {

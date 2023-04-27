@@ -13,10 +13,8 @@ Item {
     property string color_off: 'black'
     property string background_color: 'grey'
 
-
     signal taking_on_clicked()
     signal getting_off_clicked()
-
 
     Round_squere_button{
         id : button_taking_on
@@ -30,7 +28,6 @@ Item {
         text_size_gain: 1.5
         border_width_gain: 1.2
         radius_gain : 0.8
-
     }
 
     Round_squere_button{
@@ -49,9 +46,5 @@ Item {
         text_size_gain: 1.5
         border_width_gain: 1.2
         radius_gain : 0.8
-
     }
-
-
-
 }

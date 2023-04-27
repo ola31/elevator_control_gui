@@ -1,6 +1,5 @@
-#ifndef KUBOT_GUI__OLA_VIEW_MODEL_HPP_
-#define KUBOT_GUI__OLA_VIEW_MODEL_HPP_
-
+#ifndef ELEVATOR_CONTROL_GUI__OLA_VIEW_MODEL_HPP_
+#define ELEVATOR_CONTROL_GUI__OLA_VIEW_MODEL_HPP_
 
 #include <QObject>
 #include <QImage>
@@ -16,6 +15,8 @@ class OlaViewModel : public QObject
   Q_PROPERTY(
     QString robotServiceResult READ robotServiceResult WRITE setRobotServiceResult NOTIFY robotServiceResultChanged)
   Q_PROPERTY(
+    QString elevatorServiceResult READ elevatorServiceResult WRITE setElevatorServiceResult NOTIFY elevatorServiceResultChanged)
+  Q_PROPERTY(
     QString evStatus READ evStatus WRITE setEvStatus NOTIFY evStatusChanged)
 
 public:
@@ -23,28 +24,32 @@ public:
   virtual ~OlaViewModel();
 
 
-  //Q PROPERTY Setter, Getter
-
+  //Q PROPERTY <READ>
   QString sequence() const;
   QString robotServiceResult() const;
+  QString elevatorServiceResult() const;
   QString evStatus() const;
 
   Q_INVOKABLE void bttnCallRobotServiceClicked(
-    int ev_num, QString call_floor,
-    QString dest_floor);
+    int ev_num, QString call_floor, QString dest_floor);
+  Q_INVOKABLE void bttnElevatorServiceClicked(
+    int ev_num, QString direction, QString floor);
   Q_INVOKABLE void bttnSetStatusClicked(QString status);
   Q_INVOKABLE void bttnGetEvStatusClicked();
   Q_INVOKABLE void bttnCancelRobotServiceClicked();
 
 public slots:
+  //Q PROPERTY <WRITE>
   void setSequence(QString value);
   void setRobotServiceResult(QString value);
+  void setElevatorServiceResult(QString value);
   void setEvStatus(QString value);
 
 signals:
   //Q PROPERTY <NOTIFY>
   void sequenceChanged();
   void robotServiceResultChanged();
+  void elevatorServiceResultChanged();
   void evStatusChanged();
 
 protected:
@@ -56,10 +61,11 @@ private:
 
   QString m_sequence;
   QString m_robotServiceResult;
+  QString m_elevatorServiceResult;
   QString m_evStatus = "";
 
 
 };
 
 
-#endif // KUBOT_GUI__OLA_VIEW_MODEL_HPP_
+#endif // ELEVATOR_CONTROL_GUI__OLA_VIEW_MODEL_HPP_

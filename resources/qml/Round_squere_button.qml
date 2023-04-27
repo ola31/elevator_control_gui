@@ -28,17 +28,17 @@ Item {
             topMargin: parent.topMargin
         }
         style: ButtonStyle{
-          background: Rectangle{
-              color: background_color
-              border.width: {
-                  if(round_squre_button.height>=round_squre_button.width)
-                      round_squre_button.width*0.05*border_width_gain
-                  else
-                      round_squre_button.height*0.05*border_width_gain
-              }
-              border.color : (round_squre_button.pressed_)?color_on:color_off
-              radius: round_squre_button.width*0.2*radius_gain
-          }
+            background: Rectangle{
+                color: background_color
+                border.width: {
+                    if(round_squre_button.height>=round_squre_button.width)
+                        round_squre_button.width*0.05*border_width_gain
+                    else
+                        round_squre_button.height*0.05*border_width_gain
+                }
+                border.color : (round_squre_button.pressed_)?color_on:color_off
+                radius: round_squre_button.width*0.2*radius_gain
+            }
         }
 
         Text {
@@ -60,8 +60,6 @@ Item {
         onClicked: round_squre_button.clicked();
         onPressedChanged : pressed_ = (pressed_) ? false : true
     }
-
-
 }
 
 

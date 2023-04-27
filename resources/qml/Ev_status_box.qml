@@ -33,7 +33,7 @@ Item {
 
     function update_info(){
         var dict = {}
-        var list = ola_view_model.ev_status.split('/')
+        var list = informations.split('/')
         for(var i in list){
             var list2 = list[i].split(':');
             dict[list2[0]] = list2[1]
@@ -379,29 +379,28 @@ Item {
             }
             style: CheckBoxStyle {
                 indicator: Rectangle {
-                        implicitWidth: checkBox.height*0.6
-                        implicitHeight: implicitWidth
-                        radius: 3
-                        border.color: control.activeFocus ? "darkblue" : "black"
-                        border.width: 1
-                        Rectangle {
-                            visible: control.checked
-                            color: button_on_color//"#555"
-                            border.color: button_on_color
-                            radius: 2
-                            anchors.margins: 3
-                            anchors.fill: parent
+                    implicitWidth: checkBox.height*0.6
+                    implicitHeight: implicitWidth
+                    radius: 3
+                    border.color: control.activeFocus ? "darkblue" : "black"
+                    border.width: 1
+                    Rectangle {
+                        visible: control.checked
+                        color: button_on_color//"#555"
+                        border.color: button_on_color
+                        radius: 2
+                        anchors.margins: 3
+                        anchors.fill: parent
 
-                        }
-                        Text { // check
-                          visible: control.checked
-                          anchors.centerIn: parent
-                          text: '\u2713' // CHECK MARK
-                          font.pixelSize: parent.height
-                        }
+                    }
+                    Text { // check
+                      visible: control.checked
+                      anchors.centerIn: parent
+                      text: '\u2713' // CHECK MARK
+                      font.pixelSize: parent.height
+                    }
                 }
             }
-
         }
 
         Rectangle{
@@ -421,7 +420,6 @@ Item {
                     verticalCenter: parent.verticalCenter
                     right : parent.right
                 }
-
                 width: parent.width
                 height: parent.height
                 stepSize: 1

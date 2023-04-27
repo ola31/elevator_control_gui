@@ -7,5 +7,6 @@
         <file>qml/Round_squere_button.qml</file>
         <file>qml/Set_robot_service_box.qml</file>
         <file>qml/Sequence_viewer.qml</file>
+        <file>qml/Elevator_service_box.qml</file>
     </qresource>
 </RCC>

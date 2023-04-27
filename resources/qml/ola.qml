@@ -9,8 +9,8 @@ import "."
 
 Window {
     id : ola_window
-    property int w_: 1280
-    property int h_: 1080
+    property int w_: 1280 * 0.7
+    property int h_: 1080 * 0.7
     width: w_
     height: h_
     title: "EV TEST GUI"
@@ -28,9 +28,8 @@ Window {
             id: splitView1
 
             orientation: Qt.Horizontal
-            width:main_window_box.width
-            height:main_window_box.height
-
+            width: main_window_box.width
+            height: main_window_box.height
 
             SplitView{
                 id: splitView_left
@@ -62,11 +61,9 @@ Window {
                             target: ola_view_model
                             onEvStatusChanged: ev_status_box.update_info();
                         }
-
-
                     }
-
                 }
+
 
                 /* ROBOT SERVICE BOX */
 
@@ -97,13 +94,29 @@ Window {
                 orientation: Qt.Vertical
                 width: splitView1.width/2
 
-                /* EMPTY BOX */
+                /* ELEVATOR SERVICE BOX */
 
                 Rectangle {
                     color:'#EFF0F2'
                     border.color:'#EFF0F2'
                     Layout.fillWidth:true
                     height:parent.height/2
+                    Elevator_service_box{
+                        width_: parent.width
+                        height_:parent.height
+                        color_: parent.color
+                        color1: '#E3CFC6'
+                        color2: '#CEAE88'
+                        button_off_color: 'black'
+                        button_on_color: 'limegreen'
+                        button_background_color:'#CEAE88' //'#588196'
+                        button_cancel_background_color : '#588196'// '#334457'
+                        onClicked: {
+                            ola_view_model.bttnElevatorServiceClicked(ev_num, direction, floor);
+                        }
+                        service_result : ola_view_model.elevatorServiceResult
+
+                    }
                 }
 
                 /* SEQUENCE VIEWER & SET ROBOT SERVICE BOX */

@@ -12,7 +12,6 @@ Item {
     property double border_width_gain: 1.0
     property string text: 'default_text'
 
-
     Timer {
         id : blink_timer
         interval : 50
@@ -34,7 +33,6 @@ Item {
         sequence_text.text = text;
     }
 
-
     Rectangle{
         id : sequence_viewer_box
         width: parent.width
@@ -47,17 +45,15 @@ Item {
         Text {
             id: sequence_text
             text: sequence_viewer.text
+            color: 'black'
             font.pixelSize: sequence_viewer_box.height*0.4*text_size_gain
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors{
                 fill:parent
             }
-            color: 'black'
         }
-
-   }
-
+    }
 }
 
 

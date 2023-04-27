@@ -1,5 +1,5 @@
-#ifndef KUBOT_GUI__OLA_MODEL_HPP_
-#define KUBOT_GUI__OLA_MODEL_HPP_
+#ifndef ELEVATOR_CONTROL_GUI__OLA_MODEL_HPP_
+#define ELEVATOR_CONTROL_GUI__OLA_MODEL_HPP_
 
 
 #include <chrono>
@@ -71,7 +71,7 @@ public:
   void get_ev_status(int ev_num);
   void set_robot_service(std::string robot_status);
 
-  //'get' functions
+  //getter functions
   std::string get_sequence();
   bool get_robot_service_result();
   QString get_ev_status_qstr();
@@ -107,9 +107,10 @@ private:
 signals:
   void sequence_topic_signal(QString);
   void resultCallRobotService(QString);
+  void resultElevatorService(QString);
   void resultGetEvStatus(QString);
 
 };
 
 
-#endif // KUBOT_GUI__OLA_MODEL_HPP_
+#endif // ELEVATOR_CONTROL_GUI__OLA_MODEL_HPP_

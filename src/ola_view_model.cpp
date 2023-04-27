@@ -33,8 +33,12 @@ OlaViewModel::OlaViewModel(int argc, char ** argv, QObject * parent)
     SLOT(setRobotServiceResult(QString)));
 
   connect(
+    ola_model_.get(), SIGNAL(resultElevatorService(QString)), this,
+    SLOT(setElevatorServiceResult(QString)));
+
+  connect(
     ola_model_.get(), SIGNAL(resultGetEvStatus(QString)), this,
-    SIGNAL(setRobotServiceResult(QString)));
+    SLOT(setEvStatus(QString)));
 
 }
 
@@ -64,6 +68,17 @@ void OlaViewModel::setRobotServiceResult(QString value)
   emit robotServiceResultChanged();
 }
 
+QString OlaViewModel::elevatorServiceResult() const
+{
+  return m_elevatorServiceResult;
+}
+
+void OlaViewModel::setElevatorServiceResult(QString value)
+{
+  m_elevatorServiceResult = value;
+  emit elevatorServiceResultChanged();
+}
+
 QString OlaViewModel::evStatus() const
 {
   return m_evStatus;
@@ -81,6 +96,13 @@ void OlaViewModel::bttnCallRobotServiceClicked(
   std::string call_floor_ = call_floor.toStdString();
   std::string dest_floor_ = dest_floor.toStdString();
   ola_model_->robot_service_call(ev_num, call_floor_, dest_floor_);
+}
+
+void OlaViewModel::bttnElevatorServiceClicked(int ev_num, QString direction, QString floor)
+{
+  std::string direction_ = direction.toStdString();
+  std::string floor_ = floor.toStdString();
+  ola_model_->elevator_service_call(ev_num, direction_, floor_);
 }
 
 void OlaViewModel::bttnSetStatusClicked(QString status)
