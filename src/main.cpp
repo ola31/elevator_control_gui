@@ -43,8 +43,19 @@ int main(int argc, char ** argv)
 
   OlaViewModel ola_view_model(argc, argv);
 
-  engine.addImportPath("./../lib");
-  engine.addImportPath("./../qml");
+  engine.addImportPath("../lib");
+  engine.addImportPath("../qml/QtQml");
+  engine.addImportPath("../qml/QtQuick");
+  engine.addImportPath("../qml/QtQuick.2");
+
+  engine.addImportPath(QStringLiteral("qml"));
+  engine.addImportPath(QStringLiteral("lib"));
+  engine.addImportPath(QStringLiteral("../lib"));
+  engine.addImportPath(QStringLiteral("../qml"));
+
+  engine.addImportPath(QStringLiteral("../qml/QtQml"));
+  engine.addImportPath(QStringLiteral("../qml/QtQuick"));
+  engine.addImportPath(QStringLiteral("../qml/QtQuick.2"));
 
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 
