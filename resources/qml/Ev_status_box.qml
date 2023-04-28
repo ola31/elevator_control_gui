@@ -415,7 +415,7 @@ Item {
             height: width*0.1
 
             Slider {
-                id: element
+                id: slider1
                 anchors{
                     verticalCenter: parent.verticalCenter
                     right : parent.right
@@ -431,10 +431,63 @@ Item {
                     repeat_every_n_sec_text.set_text(text_value)
                     repeat_timer.interval = value*500;
                 }
+                style: SliderStyle{
+                    groove: Rectangle {
+                        implicitWidth: slider1.width
+                        implicitHeight: slider1.height/2
+                        color: "lightgray"
+                        radius: 8
+                    }
+                    handle: Rectangle {
+                          anchors.centerIn: parent
+                          color: control.pressed ? "white" : "lightgray"
+                          border.color: "gray"
+                          border.width: 2
+                          implicitWidth: slider1.width*0.15
+                          implicitHeight: implicitWidth
+                          radius: implicitWidth/2
+                     }
+                }
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

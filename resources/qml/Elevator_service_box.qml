@@ -20,7 +20,7 @@ Item {
     property string font_color: 'black'
 
     property int ev_num: 0
-    property string direction: 'none'
+    property string direction: 'Up'
     property string floor: 'none'
 
     property string service_result: 'none'
@@ -148,12 +148,43 @@ Item {
                     }
                 }
                 Rectangle {
+                    id : box_direction
                     color:color2
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
+                    ComboBox {
+                        id: comboBox_dir
+                        x: 0
+                        y: 0
+                        width : parent.width
+                        height: parent.height
+                        model: ['Car', 'Up', 'Down']
+                        currentIndex: 1
+                        onActivated: {
+                            console.log("[" + currentIndex +"]" + currentText + " is activated")
+                            direction = currentText;
+                        }
+                        style: ComboBoxStyle{
+                            background: Rectangle{
+                                color: box_direction.color
+                                border.color: color
+                            }
+
+
+                           //Text{
+                           //    text:modelData
+                           //    color: hovered?"white":"#507BF6"
+                           //    font.bold: true
+                           //}
+                        }
+
+
+                    }
+
                     TextField {
                         id: textField_call_floor
+                        visible: false
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         width : parent.width
@@ -255,7 +286,7 @@ Item {
                         height:parent.height
                         text: elevator_service_box.service_result
                         color : 'black'
-                        font.pixelSize: parent.width*0.25
+                        font.pixelSize: parent.width*0.2
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -264,6 +295,78 @@ Item {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -9,13 +9,14 @@ import "."
 
 Window {
     id : ola_window
-    property int w_: 1280 * 0.7
-    property int h_: 1080 * 0.7
+    property int w_: 1280
+    property int h_: 1080
     width: w_
     height: h_
     title: "EV TEST GUI"
     visible: true
-    color : "#334457"//"black"
+    color : "#334457"
+    //"black"
     Rectangle {
         id : main_window_box
         anchors.horizontalCenter: parent.horizontalCenter
@@ -138,7 +139,7 @@ Window {
                             top:parent.top
                             topMargin: parent.height*0.2
                         }
-                        text: qsTr(ola_view_model.sequence)
+                        text: ola_view_model.sequence
 
                         Connections{
                             target: ola_view_model

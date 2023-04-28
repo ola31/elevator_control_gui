@@ -42,6 +42,9 @@ int main(int argc, char ** argv)
   QQmlApplicationEngine engine;
 
   OlaViewModel ola_view_model(argc, argv);
+
+  engine.addImportPath("../lib");
+
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 
   engine.load(QUrl(QStringLiteral("qrc:/qml/ola.qml")));

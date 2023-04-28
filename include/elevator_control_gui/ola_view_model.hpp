@@ -11,7 +11,8 @@ class OlaViewModel : public QObject
 {
   Q_OBJECT
 
-  Q_PROPERTY(QString sequence READ sequence WRITE setSequence NOTIFY sequenceChanged)
+  Q_PROPERTY(
+    QString sequence READ sequence WRITE setSequence NOTIFY sequenceChanged SCRIPTABLE true)
   Q_PROPERTY(
     QString robotServiceResult READ robotServiceResult WRITE setRobotServiceResult NOTIFY robotServiceResultChanged)
   Q_PROPERTY(

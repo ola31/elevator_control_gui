@@ -277,7 +277,7 @@ Item {
                         height:parent.height
                         text: robot_service_box.service_result
                         color : 'black'
-                        font.pixelSize: parent.width*0.25
+                        font.pixelSize: parent.width*0.2
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -286,6 +286,16 @@ Item {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
