@@ -8,5 +8,10 @@
         <file>qml/Set_robot_service_box.qml</file>
         <file>qml/Sequence_viewer.qml</file>
         <file>qml/Elevator_service_box.qml</file>
+        <file>qml/QtQml/qmldir</file>
+        <file>qml/QtQuick/Controls/qmldir</file>
+        <file>qml/QtQuick/Layouts/qmldir</file>
+        <file>qml/QtQuick/Window.2/qmldir</file>
+        <file>qml/QtQuick.2/qmldir</file>
     </qresource>
 </RCC>
