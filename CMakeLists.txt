@@ -53,7 +53,7 @@ set(elevator_control_gui_cpp_HDRS
 set(elevator_control_gui_RESOURCES
   resources/images.qrc
   resources/qml.qrc
-  qml/quick.qrc
+#  qml/quick.qrc
 )
 
 set(elevator_control_gui_dependencies
