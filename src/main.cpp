@@ -44,6 +44,7 @@ int main(int argc, char ** argv)
   OlaViewModel ola_view_model(argc, argv);
 
   engine.addImportPath("../lib");
+  engine.addImportPath("../qml");
 
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 
