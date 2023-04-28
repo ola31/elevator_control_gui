@@ -60,6 +60,10 @@ int main(int argc, char ** argv)
   engine.addImportPath(QStringLiteral("qml/QtQuick"));
   engine.addImportPath(QStringLiteral("qml/QtQuick.2"));
 
+  engine.addImportPath(QStringLiteral("qrc:/quick"));
+  engine.addImportPath(QStringLiteral("qrc:/quick/QtQuick"));
+  engine.addImportPath(QStringLiteral("qrc:/quick/QtQml"));
+
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 
   engine.load(QUrl(QStringLiteral("qrc:/qml/ola.qml")));
