@@ -48,21 +48,21 @@ int main(int argc, char ** argv)
   engine.addImportPath("../qml/QtQuick");
   engine.addImportPath("../qml/QtQuick.2");
 
-  engine.addImportPath(QStringLiteral("qml"));
-  engine.addImportPath(QStringLiteral("lib"));
-  engine.addImportPath(QStringLiteral("../lib"));
-  engine.addImportPath(QStringLiteral("../qml"));
+//  engine.addImportPath(QStringLiteral("qml"));
+//  engine.addImportPath(QStringLiteral("lib"));
+//  engine.addImportPath(QStringLiteral("../lib"));
+//  engine.addImportPath(QStringLiteral("../qml"));
 
-  engine.addImportPath(QStringLiteral("../qml/QtQml"));
-  engine.addImportPath(QStringLiteral("../qml/QtQuick"));
-  engine.addImportPath(QStringLiteral("../qml/QtQuick.2"));
-  engine.addImportPath(QStringLiteral("qml/QtQml"));
-  engine.addImportPath(QStringLiteral("qml/QtQuick"));
-  engine.addImportPath(QStringLiteral("qml/QtQuick.2"));
+//  engine.addImportPath(QStringLiteral("../qml/QtQml"));
+//  engine.addImportPath(QStringLiteral("../qml/QtQuick"));
+//  engine.addImportPath(QStringLiteral("../qml/QtQuick.2"));
+//  engine.addImportPath(QStringLiteral("qml/QtQml"));
+//  engine.addImportPath(QStringLiteral("qml/QtQuick"));
+//  engine.addImportPath(QStringLiteral("qml/QtQuick.2"));
 
-  engine.addImportPath(QStringLiteral("qrc:/quick"));
-  engine.addImportPath(QStringLiteral("qrc:/quick/QtQuick"));
-  engine.addImportPath(QStringLiteral("qrc:/quick/QtQml"));
+  engine.addImportPath(QStringLiteral("qrc:/"));
+//  engine.addImportPath(QStringLiteral("qrc:/quick/QtQuick"));
+//  engine.addImportPath(QStringLiteral("qrc:/quick/QtQml"));
 
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 
