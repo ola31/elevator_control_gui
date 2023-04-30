@@ -45,7 +45,17 @@ Item {
         Text {
             id: sequence_text
             text: sequence_viewer.text
-            color: 'black'
+            color: {
+                if(text=='Waiting For Robot') 'limegreen'
+                else if (text=='Arrived') 'limegreen'
+                else 'black'
+            }
+            font.bold:{
+                if(text=='Waiting For Robot') true
+                else if (text=='Arrived') true
+                else false
+            }
+
             font.pixelSize: sequence_viewer_box.height*0.4*text_size_gain
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter

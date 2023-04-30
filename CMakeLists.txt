@@ -53,7 +53,6 @@ set(elevator_control_gui_cpp_HDRS
 set(elevator_control_gui_RESOURCES
   resources/images.qrc
   resources/qml.qrc
-#  qml/quick.qrc
 )
 
 set(elevator_control_gui_dependencies
@@ -73,15 +72,17 @@ qt5_add_resources(elevator_control_gui_RCC ${elevator_control_gui_RESOURCES})
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM 1)
 
 
-
 add_executable(elevator_control_gui ${elevator_control_gui_cpp_SRCS} ${elevator_control_gui_cpp_MOCS} ${elevator_control_gui_cpp_UIS_H} ${elevator_control_gui_RCC})
-#target_link_libraries(elevator_control_gui Qt5::Core)
-#target_link_libraries(elevator_control_gui Qt5::Qml Qt5::Quick)
+target_link_libraries(elevator_control_gui Qt5::Core)
+target_link_libraries(elevator_control_gui Qt5::Qml Qt5::Quick)
 
-target_link_libraries(elevator_control_gui Qt5::Core ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Core.so.5.12.8)
-target_link_libraries(elevator_control_gui Qt5::Qml ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Qml.so.5.12.8)
-target_link_libraries(elevator_control_gui Qt5::Quick ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Quick.so.5.12.8)
+
+#target_link_libraries(elevator_control_gui Qt5::Core ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Core.so.5.12.8)
+#target_link_libraries(elevator_control_gui Qt5::Qml ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Qml.so.5.12.8)
+#target_link_libraries(elevator_control_gui Qt5::Quick ${CMAKE_CURRENT_SOURCE_DIR}/lib/libQt5Quick.so.5.12.8)
 #target_link_libraries(elevator_control_gui Qt5::QuickControls2)
+
+
 
 ament_target_dependencies(elevator_control_gui ${elevator_control_gui_dependencies})
 

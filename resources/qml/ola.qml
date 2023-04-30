@@ -16,7 +16,7 @@ Window {
     title: "EV TEST GUI"
     visible: true
     color : "#334457"
-    //"black"
+
     Rectangle {
         id : main_window_box
         anchors.horizontalCenter: parent.horizontalCenter
@@ -88,6 +88,7 @@ Window {
                         onCancelClicked: ola_view_model.bttnCancelRobotServiceClicked();
                         service_result : ola_view_model.robotServiceResult
                     }
+
                 }
             }
             SplitView{
@@ -118,6 +119,19 @@ Window {
                         service_result : ola_view_model.elevatorServiceResult
 
                     }
+                    Button {
+                        id: button
+                        x: 120
+                        y: 359
+                        width: 238
+                        height: 132
+                        text: qsTr("Button")
+                        onClicked: {
+                            var component = Qt.createComponent("New_window.qml")
+                            var window    = component.createObject(ola_window)
+                            window.show()
+                        }
+                    }
                 }
 
                 /* SEQUENCE VIEWER & SET ROBOT SERVICE BOX */
@@ -137,7 +151,7 @@ Window {
                         anchors{
                             horizontalCenter: parent.horizontalCenter
                             top:parent.top
-                            topMargin: parent.height*0.2
+                            topMargin: parent.height*0.3
                         }
                         text: ola_view_model.sequence
 
@@ -153,7 +167,7 @@ Window {
                         anchors{
                             horizontalCenter: parent.horizontalCenter
                             top:parent.top
-                            topMargin: parent.height*0.6
+                            topMargin: parent.height*0.55
                         }
                         background_color: parent.color
                         color_off: 'black'

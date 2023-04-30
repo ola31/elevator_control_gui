@@ -60,10 +60,14 @@ int main(int argc, char ** argv)
 //  engine.addImportPath(QStringLiteral("qml/QtQuick"));
 //  engine.addImportPath(QStringLiteral("qml/QtQuick.2"));
 
-//  engine.addImportPath(QStringLiteral("qrc:/qml"));
-  engine.setImportPathList(QStringList(QStringLiteral("qrc:/qml")));
+  engine.addImportPath(QStringLiteral("qrc:/qml"));
+  //engine.addImportPath(QStringLiteral("resources/qml/QtQuick.2/qmldir"));
+//engine.setImportPathList(QStringList(QStringLiteral("qrc:/qml")));
+//engine.setImportPathList(QStringList(QStringLiteral("qrc:/")));
 //  engine.addImportPath(QStringLiteral("qrc:/quick/QtQuick"));
 //  engine.addImportPath(QStringLiteral("qrc:/quick/QtQml"));
+
+  //engine.setImportPathList(QStringList(QStringLiteral("qrc:/qml")));
 
   engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
 

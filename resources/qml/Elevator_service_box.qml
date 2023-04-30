@@ -68,7 +68,7 @@ Item {
                 Layout.fillWidth:true
                 Layout.preferredWidth : parent.width/3
                 Rectangle {
-                    color:color1
+                    color: color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Text {
@@ -119,9 +119,36 @@ Item {
                 Layout.fillWidth:true
                 Layout.preferredWidth : parent.width/2
                 Rectangle {
-                    color:color1
+                    id : box_ev_num
+                    //color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    ComboBox {
+                        id: comboBox_dirs
+                        width : parent.width
+                        height: parent.height
+                        model: [1, 2, 3]
+                        currentIndex: 2
+                        onActivated: {
+                            //console.log("[" + currentIndex +"]" + currentText + " is activated")
+                            ev_num = parseInt(currentText);
+                        }
+                        style: ComboBoxStyle{
+
+                            background: Rectangle{
+                                color: color1
+                                border.color: color2
+                                border.width: parent.height*0.1
+                            }
+                            textColor: 'black'
+                            font{
+                                pointSize: parent.height*0.4
+                                bold:true
+                            }
+
+                        }
+                    }
+                    /*
                     TextField {
                         id: textField_ev_num
                         Layout.fillWidth: true
@@ -146,42 +173,43 @@ Item {
                             }
                         }
                     }
+                    */
                 }
                 Rectangle {
                     id : box_direction
                     color:color2
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-
                     ComboBox {
                         id: comboBox_dir
-                        x: 0
-                        y: 0
                         width : parent.width
                         height: parent.height
                         model: ['Car', 'Up', 'Down']
                         currentIndex: 1
-                        onActivated: {
-                            console.log("[" + currentIndex +"]" + currentText + " is activated")
-                            direction = currentText;
-                        }
+                        onActivated: direction = currentText;
+
                         style: ComboBoxStyle{
                             background: Rectangle{
                                 color: box_direction.color
-                                border.color: color
+                                border.color: color1
+                                border.width: parent.height*0.1
                             }
-
-
-                           //Text{
-                           //    text:modelData
-                           //    color: hovered?"white":"#507BF6"
-                           //    font.bold: true
-                           //}
+                            textColor: 'black'
+                            font{
+                                pointSize: parent.height*0.4
+                                bold:true
+                            }
                         }
-
-
                     }
-
+//                    Text{
+//                        x: 157
+//                        y: 8
+//                        width : 20
+//                        height : 20
+//                        text : '▼'
+//                        font.pointSize: 20
+//                    }
+                    /*
                     TextField {
                         id: textField_call_floor
                         visible: false
@@ -208,11 +236,35 @@ Item {
                             }
                         }
                     }
+                    */
                 }
+
                 Rectangle {
+                    id : box_floor
                     color:color1
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    ComboBox {
+                        id: comboBox_floor
+                        width : parent.width
+                        height: parent.height
+                        model: ['B2','B1','1','2','3','4','5','6','7']
+                        currentIndex: 0
+                        onActivated: floor = currentText;
+                        style: ComboBoxStyle{
+                            background: Rectangle{
+                                color: box_floor.color
+                                border.color: color2
+                                border.width: parent.height*0.1
+                            }
+                            textColor: 'black'
+                            font{
+                                pointSize: parent.height*0.4
+                                bold:true
+                            }
+                        }
+                    }
+                    /*
                     TextField {
                         id: textField_dest_floor
                         Layout.fillWidth: true
@@ -237,6 +289,7 @@ Item {
                             }
                         }
                     }
+                    */
                 }
             }
         }
@@ -295,6 +348,143 @@ Item {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

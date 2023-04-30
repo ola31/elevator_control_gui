@@ -148,17 +148,6 @@ void OlaModel::get_ev_status(int ev_num)
       mode_s = array_msg_to_string(mode);
       error_code_s = array_msg_to_string(error_code);
       group_s = array_msg_to_string(group);
-      /*
-      std::cout << ev_num_s << std::endl;
-      std::cout << ev_name_s << std::endl;
-      std::cout << floor_s << std::endl;
-      std::cout << direction_s << std::endl;
-      std::cout << run_s << std::endl;
-      std::cout << mode_s << std::endl;
-      std::cout << error_code_s << std::endl;
-      std::cout << group_s << std::endl;
-      std::cout << group_s << std::endl;
-      */
 
       ev_status_map["ev_num"] = ev_num_s;
       ev_status_map["ev_name"] = ev_name_s;
