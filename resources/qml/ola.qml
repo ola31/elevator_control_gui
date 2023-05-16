@@ -88,7 +88,6 @@ Window {
                         onCancelClicked: ola_view_model.bttnCancelRobotServiceClicked();
                         service_result : ola_view_model.robotServiceResult
                     }
-
                 }
             }
             SplitView{
@@ -117,7 +116,6 @@ Window {
                             ola_view_model.bttnElevatorServiceClicked(ev_num, direction, floor);
                         }
                         service_result : ola_view_model.elevatorServiceResult
-
                     }
                     Button {
                         id: button

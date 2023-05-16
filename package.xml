@@ -4,12 +4,10 @@
   <name>elevator_control_gui</name>
   <version>0.1.0</version>
   <description>
-
-     kubot_gui
-
+     elevator_control_gui
   </description>
   <maintainer email="abrahamola80@gmail.com">ola</maintainer>
-  <author>ola</author>
+  <author>ola31</author>
   <license>BSD</license>
   <!-- <url type="bugtracker">https://github.com/stonier/qt_ros/issues</url> -->
   <!-- <url type="repository">https://github.com/stonier/qt_ros</url> -->
@@ -24,33 +22,6 @@
 <!--  <depend>cv_bridge</depend>
   <depend>image_transport</depend>-->
 
-  <!--<depend>ament_index_cpp</depend>
-  <depend>yaml_cpp_vendor</depend>
-  <depend>recovery_interfaces</depend>
-  <depend>robotis_server_interfaces</depend>
-  <depend>task_manager_interfaces</depend>
-  <depend>aimbot_hw_interfaces</depend>
-  <depend>aimbot_log_interfaces</depend>
-  <depend>aimbot_state_interfaces</depend>-->
-
-
-  <!--<build_depend>qt_build</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>libqt4-dev</build_depend>
-  <build_depend>cv_bridge</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>image_transport</build_depend>
-
-  <run_depend>qt_build</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>libqt4-dev</run_depend>
-  <run_depend>cv_bridge</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>image_transport</run_depend>
-  <build_depend>roscpp</build_depend>
-  <run_depend>roscpp</run_depend>
-  <build_depend>std_msgs</build_depend>
-  <run_depend>std_msgs</run_depend>-->
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

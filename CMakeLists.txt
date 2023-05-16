@@ -49,7 +49,6 @@ set(elevator_control_gui_cpp_HDRS
   include/elevator_control_gui/ola_model.hpp
 )
 
-
 set(elevator_control_gui_RESOURCES
   resources/images.qrc
   resources/qml.qrc
@@ -63,7 +62,6 @@ set(elevator_control_gui_dependencies
   std_msgs
   elevator_interfaces
 )
-
 
 qt5_wrap_cpp(elevator_control_gui_cpp_MOCS ${elevator_control_gui_cpp_HDRS})
 

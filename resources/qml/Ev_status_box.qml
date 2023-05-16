@@ -391,7 +391,6 @@ Item {
                         radius: 2
                         anchors.margins: 3
                         anchors.fill: parent
-
                     }
                     Text { // check
                       visible: control.checked
@@ -446,12 +445,16 @@ Item {
                           implicitWidth: slider1.width*0.15
                           implicitHeight: implicitWidth
                           radius: implicitWidth/2
-                     }
+                    }
                 }
             }
         }
     }
 }
+
+
+
+
 
 
 
