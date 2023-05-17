@@ -108,7 +108,7 @@ void OlaModel::cancel_robot_service()
     rclcpp::Client<elevator_interfaces::srv::CancelRobotService>::SharedFuture;
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
-      RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
+      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
       bool result = response->result;
       return;
     };
