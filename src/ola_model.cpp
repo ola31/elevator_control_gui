@@ -109,7 +109,7 @@ void OlaModel::cancel_robot_service()
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
       //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
-      bool result = response->result;
+      //bool result = response->result;
       return;
     };
 
@@ -170,7 +170,7 @@ void OlaModel::get_ev_status(int ev_num)
 std::string OlaModel::array_msg_to_string(std::vector<int8_t> array_msg)
 {
   std::string result = std::string("[");
-  for (int i = 0; i < array_msg.size(); i++) {
+  for (size_t i = 0; i < array_msg.size(); i++) {
     result = result + std::to_string(array_msg[i]);
     if (i < array_msg.size() - 1) {
       result = result + ", ";
@@ -184,7 +184,7 @@ std::string OlaModel::array_msg_to_string(std::vector<int8_t> array_msg)
 std::string OlaModel::array_msg_to_string(std::vector<int32_t> array_msg)
 {
   std::string result = std::string("[");
-  for (int i = 0; i < array_msg.size(); i++) {
+  for (size_t i = 0; i < array_msg.size(); i++) {
     result = result + std::to_string(array_msg[i]);
     if (i < array_msg.size() - 1) {
       result = result + ", ";
@@ -198,7 +198,7 @@ std::string OlaModel::array_msg_to_string(std::vector<int32_t> array_msg)
 std::string OlaModel::array_msg_to_string(std::vector<std::string> array_msg)
 {
   std::string result = std::string("[");
-  for (int i = 0; i < array_msg.size(); i++) {
+  for (size_t i = 0; i < array_msg.size(); i++) {
     result = result + array_msg[i];
     if (i < array_msg.size() - 1) {
       result = result + ", ";
@@ -233,7 +233,7 @@ void OlaModel::set_robot_service(std::string robot_status)
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
       //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
-      bool result = response->result;
+      //bool result = response->result;
       std::string ev_service_status = response->ev_service_status;
       return;
     };
