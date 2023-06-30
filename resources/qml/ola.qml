@@ -117,6 +117,7 @@ Window {
                         }
                         service_result : ola_view_model.elevatorServiceResult
                     }
+                    /*
                     Button {
                         id: button
                         x: 120
@@ -130,6 +131,7 @@ Window {
                             window.show()
                         }
                     }
+                    */
                 }
 
                 /* SEQUENCE VIEWER & SET ROBOT SERVICE BOX */
