@@ -314,8 +314,9 @@ Item {
                     Layout.fillHeight: true
                     Text {
                         id: text11
-                        width:parent.width
-                        height:parent.height
+                        //width:parent.width
+                        //height:parent.height
+                        anchors.fill: parent
                         text: qsTr("result")
                         color : 'black'
                         font.pixelSize: parent.width*0.25
@@ -335,8 +336,9 @@ Item {
                     Layout.fillHeight: true
                     Text{
                         id: text22
-                        width:parent.width
-                        height:parent.height
+                       // width:parent.width
+                       // height:parent.height
+                        anchors.fill: parent
                         text: elevator_service_box.service_result
                         color : 'black'
                         font.pixelSize: parent.width*0.2
@@ -348,6 +350,12 @@ Item {
         }
     }
 }
+
+
+
+
+
+
 
 
 
