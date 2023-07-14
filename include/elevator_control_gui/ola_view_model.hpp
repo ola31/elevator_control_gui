@@ -19,6 +19,8 @@ class OlaViewModel : public QObject
     QString elevatorServiceResult READ elevatorServiceResult WRITE setElevatorServiceResult NOTIFY elevatorServiceResultChanged)
   Q_PROPERTY(
     QString evStatus READ evStatus WRITE setEvStatus NOTIFY evStatusChanged)
+  Q_PROPERTY(
+    int evMonitorNum READ evMonitorNum WRITE setEvMonitorNum)
 
 public:
   explicit OlaViewModel(int argc, char ** argv, QObject * parent = nullptr);
@@ -30,6 +32,7 @@ public:
   QString robotServiceResult() const;
   QString elevatorServiceResult() const;
   QString evStatus() const;
+  int evMonitorNum() const;
 
   Q_INVOKABLE void bttnCallRobotServiceClicked(
     int ev_num, QString call_floor, QString dest_floor);
@@ -45,6 +48,7 @@ public slots:
   void setRobotServiceResult(QString value);
   void setElevatorServiceResult(QString value);
   void setEvStatus(QString value);
+  void setEvMonitorNum(int value);
 
 signals:
   //Q PROPERTY <NOTIFY>
@@ -64,6 +68,7 @@ private:
   QString m_robotServiceResult;
   QString m_elevatorServiceResult;
   QString m_evStatus = "";
+  int m_evMonitorNum = 0;
 
 
 };

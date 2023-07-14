@@ -89,6 +89,16 @@ void OlaViewModel::setEvStatus(QString value)
   emit evStatusChanged();
 }
 
+int OlaViewModel::evMonitorNum() const
+{
+  return m_evMonitorNum;
+}
+
+void OlaViewModel::setEvMonitorNum(int value)
+{
+  m_evMonitorNum = value;
+}
+
 void OlaViewModel::bttnCallRobotServiceClicked(
   int ev_num, QString call_floor,
   QString dest_floor)
@@ -112,7 +122,7 @@ void OlaViewModel::bttnSetStatusClicked(QString status)
 
 void OlaViewModel::bttnGetEvStatusClicked()
 {
-  ola_model_->get_ev_status(0);
+  ola_model_->get_ev_status(m_evMonitorNum);
 }
 
 void OlaViewModel::bttnCancelRobotServiceClicked()

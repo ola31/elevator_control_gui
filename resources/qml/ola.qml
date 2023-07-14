@@ -62,6 +62,7 @@ Window {
                             target: ola_view_model
                             onEvStatusChanged: ev_status_box.update_info();
                         }
+                        onBttnSetEvMonitorNumClicked: ola_view_model.setEvMonitorNum(ev_monitor_num);
                     }
                 }
 

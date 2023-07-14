@@ -29,7 +29,10 @@ Item {
     property string door: ''
     property string mode: ''
 
+    property int ev_monitor_num: 0
+
     signal clicked();
+    signal bttnSetEvMonitorNumClicked();
 
     function update_info(){
         var dict = {}
@@ -449,8 +452,118 @@ Item {
                 }
             }
         }
+        TextField {
+            id: textField_ev_num
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            width : 50
+            height: 50
+            anchors.top : parent.top
+            anchors.topMargin: parent.height*0.2
+            anchors.left: parent.left
+            anchors.leftMargin: parent.width*0.33
+            placeholderText: qsTr("0")
+            font.pointSize: height*0.4
+            font.bold: true
+            onTextChanged: {
+                ev_monitor_num = parseInt(text);
+
+            }
+            style: TextFieldStyle {
+                textColor: font_color
+                background: Rectangle {
+                    radius: 2
+                    color : color1
+                    width : parent.width
+                    height: parent.height
+                    border.color: color
+                    border.width: 1
+                }
+            }
+        }
+        Rectangle{
+            id : btn
+            color: "lime green"
+            width : parent.width/15
+            height: parent.height/15
+            anchors.left: parent.left
+            anchors.leftMargin: parent.width*0.35
+            anchors.top : parent.top
+            anchors.topMargin: parent.height*0.1
+            property bool is_pressed: false
+            property string color_released: "lime green"
+            property string color_pressed: "#33FFFFFF"
+            MouseArea{
+                anchors.fill: parent
+                onClicked: bttnSetEvMonitorNumClicked();
+                onContainsMouseChanged: {
+                    btn.is_pressed = btn.is_pressed ? false : true
+                    parent.color = (btn.is_pressed) ? btn.color_pressed : btn.color_released
+                }
+            }
+
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
