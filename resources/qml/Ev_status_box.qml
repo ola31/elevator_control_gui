@@ -456,12 +456,12 @@ Item {
             id: textField_ev_num
             Layout.fillWidth: true
             Layout.fillHeight: true
-            width : 50
-            height: 50
+            width : parent.width*0.09
+            height: width
             anchors.top : parent.top
             anchors.topMargin: parent.height*0.2
             anchors.left: parent.left
-            anchors.leftMargin: parent.width*0.33
+            anchors.leftMargin: parent.width*0.31
             placeholderText: qsTr("0")
             font.pointSize: height*0.4
             font.bold: true
@@ -470,7 +470,7 @@ Item {
 
             }
             style: TextFieldStyle {
-                textColor: font_color
+                textColor: "black"
                 background: Rectangle {
                     radius: 2
                     color : color1
@@ -483,18 +483,22 @@ Item {
         }
         Rectangle{
             id : btn
-            color: "lime green"
+            color: "#00000000"
             width : parent.width/15
-            height: parent.height/15
+            height: width
             anchors.left: parent.left
-            anchors.leftMargin: parent.width*0.35
+            anchors.leftMargin: parent.width*0.4
             anchors.top : parent.top
-            anchors.topMargin: parent.height*0.1
+            anchors.topMargin: parent.height*0.21
             property bool is_pressed: false
-            property string color_released: "lime green"
+            property string color_released: "#00000000"
             property string color_pressed: "#33FFFFFF"
+
+            radius: width*0.1
+
             MouseArea{
                 anchors.fill: parent
+                anchors.centerIn: parent
                 onClicked: bttnSetEvMonitorNumClicked();
                 onContainsMouseChanged: {
                     btn.is_pressed = btn.is_pressed ? false : true
@@ -502,10 +506,95 @@ Item {
                 }
             }
 
+           Text {
+               anchors.fill: parent
+               text: "↺"
+               color: "black"
+               font.pointSize: parent.width*0.8
+               horizontalAlignment: Text.AlignHCenter
+               verticalAlignment: Text.AlignVCenter
+           }
+
         }
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
