@@ -58,6 +58,8 @@ public:
 
   //ROS Service Client
   rclcpp::Client<elevator_interfaces::srv::CallRobotService>::SharedPtr call_robot_service_client;
+  rclcpp::Client<elevator_interfaces::srv::CallRobotServiceInEV>::SharedPtr
+    call_robot_service_in_ev_client;
   rclcpp::Client<elevator_interfaces::srv::CallElevatorService>::SharedPtr call_ev_service_client;
   rclcpp::Client<elevator_interfaces::srv::CancelRobotService>::SharedPtr
     cancel_robot_service_client;
@@ -66,6 +68,7 @@ public:
 
   //Robot Service Callers
   void robot_service_call(int ev_num, std::string call_floor, std::string dest_floor);
+  void robot_service_in_ev_call(int ev_num, std::string dest_floor);
   void elevator_service_call(int ev_num, std::string direction, std::string floor);
   void cancel_robot_service();
   void get_ev_status(int ev_num);

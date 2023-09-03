@@ -14,6 +14,9 @@ OlaModel::OlaModel()
   // Service
   call_robot_service_client = this->create_client<elevator_interfaces::srv::CallRobotService>(
     "call_robot_service");
+  call_robot_service_in_ev_client =
+    this->create_client<elevator_interfaces::srv::CallRobotServiceInEV>(
+    "call_robot_service_in_ev");
 
   call_ev_service_client = this->create_client<elevator_interfaces::srv::CallElevatorService>(
     "call_elevator_service");
@@ -72,6 +75,34 @@ void OlaModel::robot_service_call(int ev_num, std::string call_floor, std::strin
     call_robot_service_client->async_send_request(request, response_received_callback);
 }
 
+
+void OlaModel::robot_service_in_ev_call(int ev_num, std::string dest_floor)
+{
+  auto request = std::make_shared<elevator_interfaces::srv::CallRobotServiceInEV::Request>();
+  request->ev_num = ev_num;
+  request->dest_floor = dest_floor;
+
+  using ServiceResponseFuture =
+    rclcpp::Client<elevator_interfaces::srv::CallRobotServiceInEV>::SharedFuture;
+  auto response_received_callback = [this](ServiceResponseFuture future) {
+      auto response = future.get();
+      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result.c_str());
+      bool result = response->result;
+      this->robot_service_result = result;
+      QString result_qstr;
+      if (result) {
+        result_qstr = QString("True");
+      } else {
+        result_qstr = QString("False");
+      }
+
+      emit resultCallRobotService(result_qstr); //signal
+      return;
+    };
+
+  auto future_result =
+    call_robot_service_in_ev_client->async_send_request(request, response_received_callback);
+}
 
 void OlaModel::elevator_service_call(int ev_num, std::string direction, std::string floor)
 {

@@ -35,7 +35,8 @@ public:
   int evMonitorNum() const;
 
   Q_INVOKABLE void bttnCallRobotServiceClicked(
-    int ev_num, QString call_floor, QString dest_floor);
+    int ev_num, QString call_floor, QString dest_floor,
+    bool in_ev);
   Q_INVOKABLE void bttnElevatorServiceClicked(
     int ev_num, QString direction, QString floor);
   Q_INVOKABLE void bttnSetStatusClicked(QString status);

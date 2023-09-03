@@ -25,6 +25,8 @@ Item {
 
     property string service_result: 'none'
 
+    property bool in_ev: false
+
     signal clicked()
     signal cancelClicked()
 
@@ -42,7 +44,7 @@ Item {
             text:'Call\nRobot\nService'
             anchors{
                 left :parent.left
-                leftMargin: parent.width*0.7
+                leftMargin: parent.width*0.75
                 top : parent.top
                 topMargin: parent.height*0.2
             }
@@ -76,13 +78,75 @@ Item {
             text_size_gain: 0.9
         }
 
+        CheckBox {
+            id: checkBox
+
+            property bool ischecked: false
+
+            anchors{
+                bottom:parent.bottom
+                left: parent.left
+                bottomMargin: parent.height*0.13
+                leftMargin: parent.width*0.05
+            }
+            width : parent.width*0.45
+            height: width*0.25
+
+            onCheckedChanged: {
+                ischecked = ischecked ? false : true;
+                robot_service_box.in_ev = ischecked;
+                textField_call_floor.enabled = !ischecked;
+            }
+
+            Text{
+                id : repeat_every_n_sec_text
+                function set_text(value){
+                    text = value;
+                }
+                width: parent.width*0.8
+                height: parent.height
+                text: "in EV"
+                font.pixelSize: height*0.7
+                anchors.verticalCenterOffset: 0
+                //anchors.horizontalCenterOffset: 0
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+
+            }
+            style: CheckBoxStyle {
+                indicator: Rectangle {
+                    implicitWidth: checkBox.height*0.6
+                    implicitHeight: implicitWidth
+                    radius: 3
+                    border.color: control.activeFocus ? "darkblue" : "black"
+                    border.width: 1
+                    Rectangle {
+                        visible: control.checked
+                        color: button_on_color//"#555"
+                        border.color: button_on_color
+                        radius: 2
+                        anchors.margins: 3
+                        anchors.fill: parent
+                    }
+                    Text { // check
+                      visible: control.checked
+                      anchors.centerIn: parent
+                      text: '\u2713' // CHECK MARK
+                      font.pixelSize: parent.height
+                    }
+                }
+            }
+        }
+
         RowLayout {
             id: rowLayout1
             anchors.left:parent.left
             anchors.leftMargin: parent.width*0.05
             anchors.top: parent.top
             anchors.topMargin: parent.height*0.15
-            width:parent.width*0.6
+            width:parent.width*0.5
             height: parent.height*0.3
             ColumnLayout{
                 id: colunmLayout1
@@ -151,6 +215,7 @@ Item {
                         width : parent.width
                         height: parent.height
                         placeholderText: qsTr("type here")
+                        text: ""
                         font.pointSize: height*0.4
                         font.bold: true
                         onTextChanged: {
@@ -182,6 +247,7 @@ Item {
                         height: parent.height
 
                         placeholderText: qsTr("type here")
+                        text: ""
                         font.pointSize: height*0.4
                         font.bold: true
                         onTextChanged: {
@@ -191,7 +257,9 @@ Item {
                             textColor: font_color
                             background: Rectangle {
                                 radius: 2
-                                color : color2
+                                color : {
+                                    enabled ? color2 : box1.color
+                                }
                                 width : parent.width
                                 height: parent.height
                                 border.color: color
@@ -211,6 +279,7 @@ Item {
                         width : parent.width
                         height: parent.height
                         placeholderText: qsTr("type here")
+                        text: ""
                         font.pointSize: height*0.4
                         font.bold: true
                         onTextChanged: {
@@ -232,6 +301,140 @@ Item {
             }
         }
 
+        ColumnLayout{
+            id : updown_panels
+            width : parent.width/6
+            height: rowLayout1.height
+            anchors{
+                top:rowLayout1.top
+                left: rowLayout1.right
+                leftMargin: width*0.05
+            }
+
+            Item_updown_panel{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                onClicked: {
+                    var curr_txt = textField_ev_num.text;
+                    var txt;
+                    var intfloor;
+                    if(is_up){
+                        if(curr_txt===""){
+                            txt = "1"
+                        }
+                        else{
+                            txt = (parseInt(curr_txt) +1).toString();
+                        }
+                    }
+                    else{
+                        if(curr_txt===""){
+                            txt = "1"
+                        }
+                        else{
+                            intfloor = parseInt(curr_txt);
+                            txt = (parseInt(curr_txt) -1).toString();
+                            if(txt === "-1") txt = 0;
+                        }
+                    }
+                    textField_ev_num.text = txt;
+                }
+            }
+            Item_updown_panel{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                onClicked: {
+                    var curr_txt = textField_call_floor.text;
+                    var txt;
+                    var intfloor;
+                    if(is_up){
+                        if(curr_txt===""){
+                            txt = "1"
+                        }
+                        else{
+                            if(curr_txt.charAt(0) === 'B'){
+                                console.log("curr_txt: ",curr_txt);
+                                intfloor = parseInt(curr_txt.substr(1, curr_txt.length-1));
+                                if(intfloor === 1) {
+                                    txt = "1"
+                                }
+                                else{
+                                    txt = "B" + (intfloor-1).toString();
+                                }
+                            }else{
+                                txt = (parseInt(curr_txt) +1).toString();
+                            }
+                        }
+                    }
+                    else{
+                        if(curr_txt===""){
+                            txt = "1"
+                        }
+                        else{
+                            if(curr_txt.charAt(0) === 'B'){
+                                intfloor = parseInt(curr_txt.substr(1, curr_txt.length-1));
+                                txt = "B" + (intfloor+1).toString();
+                            }else{
+                                intfloor = parseInt(curr_txt);
+                                if(intfloor === 1) {
+                                    txt = "B1"
+                                }else{
+                                   txt = (parseInt(curr_txt) -1).toString();
+                                }
+                            }
+                        }
+                    }
+                    textField_call_floor.text = txt;
+                }
+            }
+            Item_updown_panel{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                onClicked: {
+                    var curr_txt = textField_dest_floor.text;
+                    var txt;
+                    var intfloor;
+                    if(is_up){
+                        if(curr_txt===""){
+                            txt = "1"
+                        }
+                        else{
+                            if(curr_txt.charAt(0) === 'B'){
+                                console.log("curr_txt: ",curr_txt);
+                                intfloor = parseInt(curr_txt.substr(1, curr_txt.length-1));
+                                if(intfloor === 1) {
+                                    txt = "1"
+                                }
+                                else{
+                                    txt = "B" + (intfloor-1).toString();
+                                }
+                            }else{
+                                txt = (parseInt(curr_txt) +1).toString();
+                            }
+                        }
+                    }
+                    else{
+                        if(curr_txt===""){
+                            txt = "1"
+                        }
+                        else{
+                            if(curr_txt.charAt(0) === 'B'){
+                                intfloor = parseInt(curr_txt.substr(1, curr_txt.length-1));
+                                txt = "B" + (intfloor+1).toString();
+                            }else{
+                                intfloor = parseInt(curr_txt);
+                                if(intfloor === 1) {
+                                    txt = "B1"
+                                }else{
+                                   txt = (parseInt(curr_txt) -1).toString();
+                                }
+                            }
+                        }
+                    }
+                    textField_dest_floor.text = txt;
+                }
+            }
+        }
+
 
         RowLayout {
             id: rowLayout2
@@ -239,7 +442,7 @@ Item {
             anchors.leftMargin: parent.width*0.15
             anchors.top: parent.top
             anchors.topMargin: parent.height*0.5
-            width:parent.width*0.5
+            width:parent.width*0.4
             height: parent.height*0.08
             ColumnLayout{
                 id: colunmLayout3
@@ -286,6 +489,236 @@ Item {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

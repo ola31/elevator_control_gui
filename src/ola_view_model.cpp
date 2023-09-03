@@ -101,11 +101,16 @@ void OlaViewModel::setEvMonitorNum(int value)
 
 void OlaViewModel::bttnCallRobotServiceClicked(
   int ev_num, QString call_floor,
-  QString dest_floor)
+  QString dest_floor, bool in_ev)
 {
-  std::string call_floor_ = call_floor.toStdString();
-  std::string dest_floor_ = dest_floor.toStdString();
-  ola_model_->robot_service_call(ev_num, call_floor_, dest_floor_);
+  if (in_ev) {
+    std::string dest_floor_ = dest_floor.toStdString();
+    ola_model_->robot_service_in_ev_call(ev_num, dest_floor_);
+  } else {
+    std::string call_floor_ = call_floor.toStdString();
+    std::string dest_floor_ = dest_floor.toStdString();
+    ola_model_->robot_service_call(ev_num, call_floor_, dest_floor_);
+  }
 }
 
 void OlaViewModel::bttnElevatorServiceClicked(int ev_num, QString direction, QString floor)

@@ -85,7 +85,7 @@ Window {
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
                         button_cancel_background_color : '#588196'// '#334457'
-                        onClicked: ola_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor);
+                        onClicked: ola_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor, in_ev);
                         onCancelClicked: ola_view_model.bttnCancelRobotServiceClicked();
                         service_result : ola_view_model.robotServiceResult
                     }

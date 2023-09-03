@@ -9,5 +9,6 @@
         <file>qml/Sequence_viewer.qml</file>
         <file>qml/Elevator_service_box.qml</file>
         <file>qml/New_window.qml</file>
+        <file>qml/Item_updown_panel.qml</file>
     </qresource>
 </RCC>
