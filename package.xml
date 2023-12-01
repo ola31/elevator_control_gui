@@ -6,8 +6,8 @@
   <description>
      elevator_control_gui
   </description>
-  <maintainer email="abrahamola80@gmail.com">ola</maintainer>
-  <author>ola31</author>
+  <maintainer email="pkw@robotis.com">Park Kiwoong</maintainer>
+  <author>Park Kiwoong</author>
   <license>BSD</license>
   <!-- <url type="bugtracker">https://github.com/stonier/qt_ros/issues</url> -->
   <!-- <url type="repository">https://github.com/stonier/qt_ros</url> -->

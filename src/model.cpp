@@ -1,7 +1,7 @@
-#include "elevator_control_gui/ola_model.hpp"
+#include "elevator_control_gui/model.hpp"
 
-OlaModel::OlaModel()
-: QObject(), Node("ola_model_node")                 //, count_(0)
+Model::Model()
+: QObject(), Node("ev_gui_model_node")                 //, count_(0)
 {
   auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(20)).best_effort().durability_volatile();
   using namespace std::placeholders;
@@ -9,7 +9,7 @@ OlaModel::OlaModel()
   //Subscriber
   sequence_subscriber = this->create_subscription<elevator_interfaces::msg::RobotServiceSequence>(
     "/robot_service_sequence", qos_profile, std::bind(
-      &OlaModel::robot_service_seqeunce_callback, this, _1));
+      &Model::robot_service_seqeunce_callback, this, _1));
 
   // Service
   call_robot_service_client = this->create_client<elevator_interfaces::srv::CallRobotService>(
@@ -32,12 +32,12 @@ OlaModel::OlaModel()
 
 }
 
-OlaModel::~OlaModel()
+Model::~Model()
 {
 }
 
 
-void OlaModel::robot_service_seqeunce_callback(
+void Model::robot_service_seqeunce_callback(
   const elevator_interfaces::msg::RobotServiceSequence::SharedPtr msg)
 {
   //RCLCPP_INFO(this->get_logger(), "sequence : %s", msg->sequence.c_str());
@@ -46,7 +46,7 @@ void OlaModel::robot_service_seqeunce_callback(
 }
 
 
-void OlaModel::robot_service_call(int ev_num, std::string call_floor, std::string dest_floor)
+void Model::robot_service_call(int ev_num, std::string call_floor, std::string dest_floor)
 {
   auto request = std::make_shared<elevator_interfaces::srv::CallRobotService::Request>();
   request->ev_num = ev_num;
@@ -76,7 +76,7 @@ void OlaModel::robot_service_call(int ev_num, std::string call_floor, std::strin
 }
 
 
-void OlaModel::robot_service_in_ev_call(int ev_num, std::string dest_floor)
+void Model::robot_service_in_ev_call(int ev_num, std::string dest_floor)
 {
   auto request = std::make_shared<elevator_interfaces::srv::CallRobotServiceInEV::Request>();
   request->ev_num = ev_num;
@@ -104,7 +104,7 @@ void OlaModel::robot_service_in_ev_call(int ev_num, std::string dest_floor)
     call_robot_service_in_ev_client->async_send_request(request, response_received_callback);
 }
 
-void OlaModel::elevator_service_call(int ev_num, std::string direction, std::string floor)
+void Model::elevator_service_call(int ev_num, std::string direction, std::string floor)
 {
   auto request = std::make_shared<elevator_interfaces::srv::CallElevatorService::Request>();
   request->ev_num = ev_num;
@@ -131,7 +131,7 @@ void OlaModel::elevator_service_call(int ev_num, std::string direction, std::str
 }
 
 
-void OlaModel::cancel_robot_service()
+void Model::cancel_robot_service()
 {
   auto request = std::make_shared<elevator_interfaces::srv::CancelRobotService::Request>();
 
@@ -149,7 +149,7 @@ void OlaModel::cancel_robot_service()
 }
 
 
-void OlaModel::get_ev_status(int ev_num)
+void Model::get_ev_status(int ev_num)
 {
   auto request = std::make_shared<elevator_interfaces::srv::GetElevatorStatus::Request>();
   request->ev_num = ev_num;
@@ -198,7 +198,7 @@ void OlaModel::get_ev_status(int ev_num)
     get_ev_status_client->async_send_request(request, response_received_callback);
 }
 
-std::string OlaModel::array_msg_to_string(std::vector<int8_t> array_msg)
+std::string Model::array_msg_to_string(std::vector<int8_t> array_msg)
 {
   std::string result = std::string("[");
   for (size_t i = 0; i < array_msg.size(); i++) {
@@ -212,7 +212,7 @@ std::string OlaModel::array_msg_to_string(std::vector<int8_t> array_msg)
 }
 
 
-std::string OlaModel::array_msg_to_string(std::vector<int32_t> array_msg)
+std::string Model::array_msg_to_string(std::vector<int32_t> array_msg)
 {
   std::string result = std::string("[");
   for (size_t i = 0; i < array_msg.size(); i++) {
@@ -226,7 +226,7 @@ std::string OlaModel::array_msg_to_string(std::vector<int32_t> array_msg)
 }
 
 
-std::string OlaModel::array_msg_to_string(std::vector<std::string> array_msg)
+std::string Model::array_msg_to_string(std::vector<std::string> array_msg)
 {
   std::string result = std::string("[");
   for (size_t i = 0; i < array_msg.size(); i++) {
@@ -239,7 +239,7 @@ std::string OlaModel::array_msg_to_string(std::vector<std::string> array_msg)
   return result;
 }
 
-QString OlaModel::get_ev_status_qstr()
+QString Model::get_ev_status_qstr()
 {
   std::string ev_status_stdstr("");
   std::map<std::string, std::string>::iterator it;
@@ -254,7 +254,7 @@ QString OlaModel::get_ev_status_qstr()
 }
 
 
-void OlaModel::set_robot_service(std::string robot_status)
+void Model::set_robot_service(std::string robot_status)
 {
   auto request = std::make_shared<elevator_interfaces::srv::SetRobotService::Request>();
   request->robot_status = robot_status;
@@ -274,13 +274,13 @@ void OlaModel::set_robot_service(std::string robot_status)
 }
 
 
-bool OlaModel::get_robot_service_result()
+bool Model::get_robot_service_result()
 {
   return robot_service_result;
 }
 
 
-std::string OlaModel::get_sequence()
+std::string Model::get_sequence()
 {
   return sequence;
 }

@@ -16,7 +16,7 @@
 #include <QQmlContext>
 
 
-#include "elevator_control_gui/ola_view_model.hpp"
+#include "elevator_control_gui/view_model.hpp"
 
 /*****************************************************************************
 ** Main
@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
 
   /*** QML ***/
   QQmlApplicationEngine engine;
-  OlaViewModel ola_view_model(argc, argv);
+  ViewModel view_model(argc, argv);
 
   engine.addImportPath(QStringLiteral("qrc:/qml"));
   // engine.addImportPath(QStringLiteral("resources/qml/QtQuick.2/qmldir"));
@@ -45,9 +45,9 @@ int main(int argc, char ** argv)
 
   // engine.setImportPathList(QStringList(QStringLiteral("qrc:/qml")));
 
-  engine.rootContext()->setContextProperty("ola_view_model", &ola_view_model);
+  engine.rootContext()->setContextProperty("ev_gui_view_model", &view_model);
 
-  engine.load(QUrl(QStringLiteral("qrc:/qml/ola.qml")));
+  engine.load(QUrl(QStringLiteral("qrc:/qml/main_page.qml")));
   // engine.load(QUrl(QStringLiteral("/home/ola/robot_ws/src/kubot_gui/resources/qml/ola.qml")));
 
 

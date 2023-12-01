@@ -8,7 +8,7 @@ import "."
 
 
 Window {
-    id : ola_window
+    id : main_window
     property int w_: 1280
     property int h_: 1080
     width: w_
@@ -55,14 +55,14 @@ Window {
                         button_off_color: 'black'
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
-                        onClicked: ola_view_model.bttnGetEvStatusClicked();
+                        onClicked: ev_gui_view_model.bttnGetEvStatusClicked();
                         info_text_size_gain: 1.4
-                        informations: ola_view_model.evStatus
+                        informations: ev_gui_view_model.evStatus
                         Connections{
-                            target: ola_view_model
+                            target: ev_gui_view_model
                             onEvStatusChanged: ev_status_box.update_info();
                         }
-                        onBttnSetEvMonitorNumClicked: ola_view_model.setEvMonitorNum(ev_monitor_num);
+                        onBttnSetEvMonitorNumClicked: ev_gui_view_model.setEvMonitorNum(ev_monitor_num);
                     }
                 }
 
@@ -85,9 +85,9 @@ Window {
                         button_on_color: 'limegreen'
                         button_background_color:'#588196'
                         button_cancel_background_color : '#588196'// '#334457'
-                        onClicked: ola_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor, in_ev);
-                        onCancelClicked: ola_view_model.bttnCancelRobotServiceClicked();
-                        service_result : ola_view_model.robotServiceResult
+                        onClicked: ev_gui_view_model.bttnCallRobotServiceClicked(ev_num, call_floor, dest_floor, in_ev);
+                        onCancelClicked: ev_gui_view_model.bttnCancelRobotServiceClicked();
+                        service_result : ev_gui_view_model.robotServiceResult
                     }
                 }
             }
@@ -114,9 +114,9 @@ Window {
                         button_background_color:'#CEAE88' //'#588196'
                         button_cancel_background_color : '#588196'// '#334457'
                         onClicked: {
-                            ola_view_model.bttnElevatorServiceClicked(ev_num, direction, floor);
+                            ev_gui_view_model.bttnElevatorServiceClicked(ev_num, direction, floor);
                         }
-                        service_result : ola_view_model.elevatorServiceResult
+                        service_result : ev_gui_view_model.elevatorServiceResult
                     }
                     /*
                     Button {
@@ -128,7 +128,7 @@ Window {
                         text: qsTr("Button")
                         onClicked: {
                             var component = Qt.createComponent("New_window.qml")
-                            var window    = component.createObject(ola_window)
+                            var window    = component.createObject(main_window)
                             window.show()
                         }
                     }
@@ -154,10 +154,10 @@ Window {
                             top:parent.top
                             topMargin: parent.height*0.3
                         }
-                        text: ola_view_model.sequence
+                        text: ev_gui_view_model.sequence
 
                         Connections{
-                            target: ola_view_model
+                            target: ev_gui_view_model
                             onSequenceChanged: sequence_viewer.blink();
                         }
                     }
@@ -173,8 +173,8 @@ Window {
                         background_color: parent.color
                         color_off: 'black'
                         color_on: 'limegreen'
-                        onTaking_on_clicked: ola_view_model.bttnSetStatusClicked("Taking On")
-                        onGetting_off_clicked: ola_view_model.bttnSetStatusClicked("Getting Off")
+                        onTaking_on_clicked: ev_gui_view_model.bttnSetStatusClicked("Taking On")
+                        onGetting_off_clicked: ev_gui_view_model.bttnSetStatusClicked("Getting Off")
                     }
                 }
             }

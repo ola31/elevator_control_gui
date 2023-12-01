@@ -1,5 +1,5 @@
-#ifndef ELEVATOR_CONTROL_GUI__OLA_MODEL_HPP_
-#define ELEVATOR_CONTROL_GUI__OLA_MODEL_HPP_
+#ifndef ELEVATOR_CONTROL_GUI__MODEL_HPP_
+#define ELEVATOR_CONTROL_GUI__MODEL_HPP_
 
 
 #include <chrono>
@@ -44,13 +44,13 @@
 using namespace std::chrono_literals;
 using std::placeholders::_1;
 
-class OlaModel : public QObject, public rclcpp::Node
+class Model : public QObject, public rclcpp::Node
 {
   Q_OBJECT
 
 public:
-  OlaModel();
-  ~OlaModel();
+  Model();
+  ~Model();
 
   //ROS Subscriber
   rclcpp::Subscription<elevator_interfaces::msg::RobotServiceSequence>::SharedPtr
@@ -116,4 +116,4 @@ signals:
 };
 
 
-#endif // ELEVATOR_CONTROL_GUI__OLA_MODEL_HPP_
+#endif // ELEVATOR_CONTROL_GUI__MODEL_HPP_

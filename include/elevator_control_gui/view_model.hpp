@@ -1,13 +1,13 @@
-#ifndef ELEVATOR_CONTROL_GUI__OLA_VIEW_MODEL_HPP_
-#define ELEVATOR_CONTROL_GUI__OLA_VIEW_MODEL_HPP_
+#ifndef ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_
+#define ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_
 
 #include <QObject>
 #include <QImage>
-#include "elevator_control_gui/ola_model.hpp"
+#include "elevator_control_gui/model.hpp"
 #include <QMap>
 #include <map>
 
-class OlaViewModel : public QObject
+class ViewModel : public QObject
 {
   Q_OBJECT
 
@@ -23,8 +23,8 @@ class OlaViewModel : public QObject
     int evMonitorNum READ evMonitorNum WRITE setEvMonitorNum)
 
 public:
-  explicit OlaViewModel(int argc, char ** argv, QObject * parent = nullptr);
-  virtual ~OlaViewModel();
+  explicit ViewModel(int argc, char ** argv, QObject * parent = nullptr);
+  virtual ~ViewModel();
 
 
   //Q PROPERTY <READ>
@@ -63,7 +63,7 @@ protected:
 
 private:
   std::thread spin_thread;
-  std::shared_ptr<OlaModel> ola_model_;
+  std::shared_ptr<Model> model_;
 
   QString m_sequence;
   QString m_robotServiceResult;
@@ -75,4 +75,4 @@ private:
 };
 
 
-#endif // ELEVATOR_CONTROL_GUI__OLA_VIEW_MODEL_HPP_
+#endif // ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_

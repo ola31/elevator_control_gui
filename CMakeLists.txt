@@ -35,22 +35,34 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs)
 find_package(elevator_interfaces)
 
+if(NOT Qt5Quick_FOUND)
+    message("")
+    message("#### ERROR ####")
+    message("Qt5::Quick is not installed!!")
+    message("")
+    message(" sudo apt-get install qml-module-qtquick-controls   ")
+    message(" sudo apt-get install qml-module-qtquick2   ")
+    message("")
+    message("###############")
+    message("")
+    message(FATAL_ERROR)
+endif()
+
 
 include_directories(include)
 
 set(elevator_control_gui_cpp_SRCS
   src/main.cpp
-  src/ola_view_model.cpp
-  src/ola_model.cpp
+  src/view_model.cpp
+  src/model.cpp
 )
 
 set(elevator_control_gui_cpp_HDRS
-  include/elevator_control_gui/ola_view_model.hpp
-  include/elevator_control_gui/ola_model.hpp
+  include/elevator_control_gui/view_model.hpp
+  include/elevator_control_gui/model.hpp
 )
 
 set(elevator_control_gui_RESOURCES
-  resources/images.qrc
   resources/qml.qrc
 )
 
