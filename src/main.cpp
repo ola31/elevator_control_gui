@@ -1,13 +1,4 @@
-/**
- * @file /src/main.cpp
- *
- * @brief Qt based gui.
- *
- * @date November 2010
- **/
-/*****************************************************************************
-** Includes
-*****************************************************************************/
+// Copyright 2023 ROBOTIS CO., LTD.
 
 #include <QtGui>
 #include <QApplication>
@@ -18,19 +9,11 @@
 
 #include "elevator_control_gui/view_model.hpp"
 
-/*****************************************************************************
-** Main
-*****************************************************************************/
-
 int main(int argc, char ** argv)
 {
-
-  /*********************
-  ** Qt
-  **********************/
+  /*** Qt ***/
   QApplication app(argc, argv);
-  //QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
+  // QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   /*** QML ***/
   QQmlApplicationEngine engine;
@@ -52,5 +35,4 @@ int main(int argc, char ** argv)
 
 
   return app.exec();
-
 }

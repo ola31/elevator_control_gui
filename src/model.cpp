@@ -1,3 +1,10 @@
+// Copyright 2023 ROBOTIS CO., LTD.
+
+#include <string>
+#include <memory>
+#include <vector>
+#include <map>
+
 #include "elevator_control_gui/model.hpp"
 
 Model::Model()
@@ -6,7 +13,7 @@ Model::Model()
   auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(20)).best_effort().durability_volatile();
   using namespace std::placeholders;
 
-  //Subscriber
+  // Subscriber
   sequence_subscriber = this->create_subscription<elevator_interfaces::msg::RobotServiceSequence>(
     "/robot_service_sequence", qos_profile, std::bind(
       &Model::robot_service_seqeunce_callback, this, _1));
@@ -29,7 +36,6 @@ Model::Model()
 
   set_robot_status_client = this->create_client<elevator_interfaces::srv::SetRobotService>(
     "set_robot_service");
-
 }
 
 Model::~Model()
@@ -40,7 +46,7 @@ Model::~Model()
 void Model::robot_service_seqeunce_callback(
   const elevator_interfaces::msg::RobotServiceSequence::SharedPtr msg)
 {
-  //RCLCPP_INFO(this->get_logger(), "sequence : %s", msg->sequence.c_str());
+  // RCLCPP_INFO(this->get_logger(), "sequence : %s", msg->sequence.c_str());
   this->sequence = msg->sequence;
   emit sequence_topic_signal(QString::fromStdString(this->sequence));
 }
@@ -57,7 +63,7 @@ void Model::robot_service_call(int ev_num, std::string call_floor, std::string d
     rclcpp::Client<elevator_interfaces::srv::CallRobotService>::SharedFuture;
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
-      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result.c_str());
+      // RCLCPP_INFO(this->get_logger(), "Result : %s", response->result.c_str());
       bool result = response->result;
       this->robot_service_result = result;
       QString result_qstr;
@@ -67,7 +73,7 @@ void Model::robot_service_call(int ev_num, std::string call_floor, std::string d
         result_qstr = QString("False");
       }
 
-      emit resultCallRobotService(result_qstr); //signal
+      emit resultCallRobotService(result_qstr);  // signal
       return;
     };
 
@@ -86,7 +92,7 @@ void Model::robot_service_in_ev_call(int ev_num, std::string dest_floor)
     rclcpp::Client<elevator_interfaces::srv::CallRobotServiceInEV>::SharedFuture;
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
-      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result.c_str());
+      // RCLCPP_INFO(this->get_logger(), "Result : %s", response->result.c_str());
       bool result = response->result;
       this->robot_service_result = result;
       QString result_qstr;
@@ -96,7 +102,7 @@ void Model::robot_service_in_ev_call(int ev_num, std::string dest_floor)
         result_qstr = QString("False");
       }
 
-      emit resultCallRobotService(result_qstr); //signal
+      emit resultCallRobotService(result_qstr);  // signal
       return;
     };
 
@@ -122,7 +128,7 @@ void Model::elevator_service_call(int ev_num, std::string direction, std::string
       } else {
         result_qstr = QString("False");
       }
-      emit resultElevatorService(result_qstr); //signal
+      emit resultElevatorService(result_qstr);  // signal
       return;
     };
 
@@ -139,8 +145,8 @@ void Model::cancel_robot_service()
     rclcpp::Client<elevator_interfaces::srv::CancelRobotService>::SharedFuture;
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
-      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
-      //bool result = response->result;
+      // RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
+      // bool result = response->result;
       return;
     };
 
@@ -158,7 +164,7 @@ void Model::get_ev_status(int ev_num)
     rclcpp::Client<elevator_interfaces::srv::GetElevatorStatus>::SharedFuture;
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
-      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
+      // RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
 
       std::vector<int8_t> ev_num = response->ev_num;
       std::vector<std::string> ev_name = response->ev_name;
@@ -263,8 +269,8 @@ void Model::set_robot_service(std::string robot_status)
     rclcpp::Client<elevator_interfaces::srv::SetRobotService>::SharedFuture;
   auto response_received_callback = [this](ServiceResponseFuture future) {
       auto response = future.get();
-      //RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
-      //bool result = response->result;
+      // RCLCPP_INFO(this->get_logger(), "Result : %s", response->result);
+      // bool result = response->result;
       std::string ev_service_status = response->ev_service_status;
       return;
     };

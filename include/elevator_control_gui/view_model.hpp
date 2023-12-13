@@ -1,11 +1,17 @@
+// Copyright 2023 ROBOTIS CO., LTD.
+
 #ifndef ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_
 #define ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_
 
 #include <QObject>
-#include <QImage>
-#include "elevator_control_gui/model.hpp"
 #include <QMap>
+#include <QImage>
+
 #include <map>
+#include <memory>
+
+#include "elevator_control_gui/model.hpp"
+
 
 class ViewModel : public QObject
 {
@@ -14,9 +20,11 @@ class ViewModel : public QObject
   Q_PROPERTY(
     QString sequence READ sequence WRITE setSequence NOTIFY sequenceChanged SCRIPTABLE true)
   Q_PROPERTY(
-    QString robotServiceResult READ robotServiceResult WRITE setRobotServiceResult NOTIFY robotServiceResultChanged)
+    QString robotServiceResult
+    READ robotServiceResult WRITE setRobotServiceResult NOTIFY robotServiceResultChanged)
   Q_PROPERTY(
-    QString elevatorServiceResult READ elevatorServiceResult WRITE setElevatorServiceResult NOTIFY elevatorServiceResultChanged)
+    QString elevatorServiceResult
+    READ elevatorServiceResult WRITE setElevatorServiceResult NOTIFY elevatorServiceResultChanged)
   Q_PROPERTY(
     QString evStatus READ evStatus WRITE setEvStatus NOTIFY evStatusChanged)
   Q_PROPERTY(
@@ -27,7 +35,7 @@ public:
   virtual ~ViewModel();
 
 
-  //Q PROPERTY <READ>
+  // Q PROPERTY <READ>
   QString sequence() const;
   QString robotServiceResult() const;
   QString elevatorServiceResult() const;
@@ -44,7 +52,7 @@ public:
   Q_INVOKABLE void bttnCancelRobotServiceClicked();
 
 public slots:
-  //Q PROPERTY <WRITE>
+  // Q PROPERTY <WRITE>
   void setSequence(QString value);
   void setRobotServiceResult(QString value);
   void setElevatorServiceResult(QString value);
@@ -52,7 +60,7 @@ public slots:
   void setEvMonitorNum(int value);
 
 signals:
-  //Q PROPERTY <NOTIFY>
+  // Q PROPERTY <NOTIFY>
   void sequenceChanged();
   void robotServiceResultChanged();
   void elevatorServiceResultChanged();
@@ -70,9 +78,7 @@ private:
   QString m_elevatorServiceResult;
   QString m_evStatus = "";
   int m_evMonitorNum = 0;
-
-
 };
 
 
-#endif // ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_
+#endif  // ELEVATOR_CONTROL_GUI__VIEW_MODEL_HPP_

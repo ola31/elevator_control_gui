@@ -1,16 +1,18 @@
+// Copyright 2023 ROBOTIS CO., LTD.
+
 #ifndef ELEVATOR_CONTROL_GUI__MODEL_HPP_
 #define ELEVATOR_CONTROL_GUI__MODEL_HPP_
 
+#include <QImage>
+
+#include <stdint.h>
 
 #include <chrono>
 #include <functional>
 #include <memory>
 
-#include <thread>
-
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <thread>
 
 #include <map>
@@ -38,10 +40,6 @@
 #include "elevator_interfaces/srv/set_elevator_group_control.hpp"
 
 
-#include <QImage>
-
-
-using namespace std::chrono_literals;
 using std::placeholders::_1;
 
 class Model : public QObject, public rclcpp::Node
@@ -52,11 +50,11 @@ public:
   Model();
   ~Model();
 
-  //ROS Subscriber
+  // ROS Subscriber
   rclcpp::Subscription<elevator_interfaces::msg::RobotServiceSequence>::SharedPtr
     sequence_subscriber;
 
-  //ROS Service Client
+  // ROS Service Client
   rclcpp::Client<elevator_interfaces::srv::CallRobotService>::SharedPtr call_robot_service_client;
   rclcpp::Client<elevator_interfaces::srv::CallRobotServiceInEV>::SharedPtr
     call_robot_service_in_ev_client;
@@ -66,7 +64,7 @@ public:
   rclcpp::Client<elevator_interfaces::srv::GetElevatorStatus>::SharedPtr get_ev_status_client;
   rclcpp::Client<elevator_interfaces::srv::SetRobotService>::SharedPtr set_robot_status_client;
 
-  //Robot Service Callers
+  // Robot Service Callers
   void robot_service_call(int ev_num, std::string call_floor, std::string dest_floor);
   void robot_service_in_ev_call(int ev_num, std::string dest_floor);
   void elevator_service_call(int ev_num, std::string direction, std::string floor);
@@ -74,7 +72,7 @@ public:
   void get_ev_status(int ev_num);
   void set_robot_service(std::string robot_status);
 
-  //getter functions
+  // getter functions
   std::string get_sequence();
   bool get_robot_service_result();
   QString get_ev_status_qstr();
@@ -82,11 +80,11 @@ public:
 private:
   std::thread spin_thread;
 
-  //ROS Topic Callback
+  // ROS Topic Callback
   void robot_service_seqeunce_callback(
     const elevator_interfaces::msg::RobotServiceSequence::SharedPtr msg);
 
-  //Member Variables
+  // Member Variables
   std::string sequence;
   bool robot_service_result;
 
@@ -102,7 +100,7 @@ private:
 
   std::map<std::string, std::string> ev_status_map;
 
-  //Member Functions
+  // Member Functions
   std::string array_msg_to_string(std::vector<int8_t> array_msg);
   std::string array_msg_to_string(std::vector<int32_t> array_msg);
   std::string array_msg_to_string(std::vector<std::string> array_msg);
@@ -112,8 +110,7 @@ signals:
   void resultCallRobotService(QString);
   void resultElevatorService(QString);
   void resultGetEvStatus(QString);
-
 };
 
 
-#endif // ELEVATOR_CONTROL_GUI__MODEL_HPP_
+#endif  // ELEVATOR_CONTROL_GUI__MODEL_HPP_

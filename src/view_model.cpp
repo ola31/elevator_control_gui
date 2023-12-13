@@ -1,4 +1,9 @@
+// Copyright 2023 ROBOTIS CO., LTD.
+
 #include <iostream>
+#include <memory>
+#include <string>
+
 #include "elevator_control_gui/view_model.hpp"
 
 
@@ -8,7 +13,7 @@ ViewModel::ViewModel(int argc, char ** argv, QObject * parent)
   rclcpp::init(argc, argv);
   model_ = std::make_shared<Model>();
 
-  //ROS Spin Thread
+  // ROS Spin Thread
   auto ros_spin = [this]() {
       rclcpp::executors::SingleThreadedExecutor exec;
       rclcpp::WallRate loop_rate(100);
@@ -39,7 +44,6 @@ ViewModel::ViewModel(int argc, char ** argv, QObject * parent)
   connect(
     model_.get(), SIGNAL(resultGetEvStatus(QString)), this,
     SLOT(setEvStatus(QString)));
-
 }
 
 ViewModel::~ViewModel()
